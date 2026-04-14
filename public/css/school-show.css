@@ -1,0 +1,398 @@
+/* School Show/Detail - Custom Styles */
+
+/* Leaflet custom styles */
+.custom-div-icon {
+    background: transparent;
+    border: none;
+}
+
+.leaflet-container {
+    font-family: inherit;
+}
+
+.leaflet-popup-content {
+    font-family: inherit;
+    margin: 13px 19px;
+}
+
+.leaflet-popup-content-wrapper {
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.dark .leaflet-popup-content-wrapper {
+    background-color: #1f2937;
+    color: #f3f4f6;
+}
+
+.dark .leaflet-popup-tip {
+    background-color: #1f2937;
+}
+
+/* Button disabled state */
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Cancel button hover state */
+#cancelRejectBtn:not(:disabled):hover {
+    background-color: #f3f4f6;
+}
+
+.dark #cancelRejectBtn:not(:disabled):hover {
+    background-color: #374151;
+}
+
+/* Status badge animations */
+@keyframes pulse-slow {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.7;
+    }
+}
+
+.animate-pulse-slow {
+    animation: pulse-slow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Card hover effects */
+.bg-white.shadow-sm:hover,
+.dark .bg-gray-800.shadow-sm:hover {
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+/* Gradient backgrounds */
+.bg-gradient-to-r {
+    background-size: 200% 200%;
+}
+
+.bg-gradient-to-br {
+    background-size: 200% 200%;
+}
+
+/* Modal backdrop animation */
+#rejectModal {
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+}
+
+#rejectModal.active {
+    opacity: 1;
+}
+
+/* Modal content animation */
+.scale-95 {
+    transform: scale(0.95);
+}
+
+.scale-100 {
+    transform: scale(1);
+}
+
+/* Smooth transitions */
+.transition-all {
+    transition-property: all;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 200ms;
+}
+
+/* Stats animation */
+@keyframes fade-in {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fade-in {
+    animation: fade-in 0.5s ease-out;
+}
+
+/* Status indicators */
+.status-indicator {
+    position: relative;
+    display: inline-block;
+}
+
+.status-indicator::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: -12px;
+    transform: translateY(-50%);
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: currentColor;
+}
+
+/* Logo container */
+.logo-container {
+    transition: transform 0.3s ease-in-out;
+}
+
+.logo-container:hover {
+    transform: scale(1.05);
+}
+
+/* Info card hover effect */
+.info-card-item:hover {
+    background-color: rgba(59, 130, 246, 0.05);
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+    margin: -0.5rem;
+    transition: all 0.2s ease-in-out;
+}
+
+.dark .info-card-item:hover {
+    background-color: rgba(59, 130, 246, 0.1);
+}
+
+/* Badge styles */
+.badge-status {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.25rem 0.75rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    border-radius: 9999px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* Button group styles */
+.button-group {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.button-group button {
+    transition: all 0.2s ease-in-out;
+}
+
+.button-group button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+}
+
+.button-group button:active {
+    transform: translateY(0);
+}
+
+/* Scroll indicator */
+.scroll-indicator {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(to right, #3b82f6, #8b5cf6);
+    transform-origin: left;
+    z-index: 9999;
+}
+
+/* Loading skeleton (for future use) */
+.skeleton {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+}
+
+.dark .skeleton {
+    background: linear-gradient(90deg, #374151 25%, #4b5563 50%, #374151 75%);
+    background-size: 200% 100%;
+}
+
+@keyframes loading {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+/* Responsive map container */
+#map {
+    min-height: 250px;
+}
+
+@media (max-width: 768px) {
+    #map {
+        height: 200px !important;
+    }
+}
+
+/* Tooltip styles */
+.tooltip {
+    position: relative;
+}
+
+.tooltip:hover::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 0.5rem 0.75rem;
+    background-color: #1f2937;
+    color: white;
+    font-size: 0.875rem;
+    border-radius: 0.375rem;
+    white-space: nowrap;
+    z-index: 10;
+    margin-bottom: 0.5rem;
+}
+
+.dark .tooltip:hover::after {
+    background-color: #374151;
+}
+
+/* Copy to clipboard indicator */
+[data-coordinate] {
+    transition: all 0.2s ease-in-out;
+}
+
+[data-coordinate]:hover {
+    color: #3b82f6;
+    transform: scale(1.05);
+}
+
+.dark [data-coordinate]:hover {
+    color: #60a5fa;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.dark ::-webkit-scrollbar-track {
+    background: #1f2937;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+    background: #4b5563;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+    background: #6b7280;
+}
+
+/* Print styles */
+@media print {
+    .no-print {
+        display: none !important;
+    }
+    
+    #map {
+        height: 400px !important;
+    }
+    
+    .bg-gradient-to-r,
+    .bg-gradient-to-br {
+        background: white !important;
+        color: black !important;
+    }
+}
+
+/* Focus visible for accessibility */
+*:focus-visible {
+    outline: 2px solid #3b82f6;
+    outline-offset: 2px;
+}
+
+.dark *:focus-visible {
+    outline-color: #60a5fa;
+}
+
+/* Smooth page transitions */
+body {
+    transition: background-color 0.3s ease-in-out;
+}
+
+/* Grid gap responsive */
+@media (max-width: 1024px) {
+    .lg\\:col-span-2 {
+        grid-column: span 1 / span 1;
+    }
+}
+
+/* Stats card animation delay */
+[data-stat]:nth-child(1) { animation-delay: 0.1s; }
+[data-stat]:nth-child(2) { animation-delay: 0.2s; }
+[data-stat]:nth-child(3) { animation-delay: 0.3s; }
+[data-stat]:nth-child(4) { animation-delay: 0.4s; }
+
+/* Header sticky behavior (optional) */
+.sticky-header {
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    background-color: white;
+    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
+}
+
+.dark .sticky-header {
+    background-color: #111827;
+}
+
+/* Improved button hover states */
+button, a.button {
+    position: relative;
+    overflow: hidden;
+}
+
+button::before, a.button::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+button:hover::before, a.button:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+/* Map marker animation */
+@keyframes marker-bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.marker-bounce {
+    animation: marker-bounce 2s ease-in-out infinite;
+}

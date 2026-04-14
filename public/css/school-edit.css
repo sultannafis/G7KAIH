@@ -1,0 +1,280 @@
+/* School Edit Form - Custom Styles */
+
+/* Map tiles dark mode support */
+.map-tiles {
+    filter: var(--map-filter, none);
+}
+
+.dark .map-tiles {
+    filter: brightness(0.6) invert(1) contrast(3) hue-rotate(200deg) saturate(0.3) brightness(0.7);
+}
+
+#map {
+    z-index: 1;
+}
+
+/* Form validation styles */
+input:invalid, 
+select:invalid, 
+textarea:invalid {
+    border-color: #f87171;
+}
+
+input:valid, 
+select:valid, 
+textarea:valid {
+    border-color: #34d399;
+}
+
+/* Transition effects */
+.transition-all {
+    transition-property: all;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 300ms;
+}
+
+/* Loading animation */
+@keyframes spin {
+    from { 
+        transform: rotate(0deg); 
+    }
+    to { 
+        transform: rotate(360deg); 
+    }
+}
+
+.animate-spin {
+    animation: spin 1s linear infinite;
+}
+
+/* Logo preview container */
+#logoPreview img {
+    transition: all 0.3s ease-in-out;
+}
+
+#logoPreview img:hover {
+    transform: scale(1.05);
+}
+
+/* Map loading overlay */
+#mapLoading {
+    backdrop-filter: blur(4px);
+    transition: opacity 0.3s ease-in-out;
+}
+
+/* Card hover effects */
+.bg-white.shadow-lg:hover,
+.dark .bg-gray-800.shadow-lg:hover {
+    box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+/* Button hover effects */
+button:hover {
+    transform: translateY(-1px);
+    transition: transform 0.2s ease-in-out;
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+/* Form input focus styles */
+input:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    border-color: #818cf8;
+    box-shadow: 0 0 0 3px rgba(129, 140, 248, 0.1);
+    transition: all 0.2s ease-in-out;
+}
+
+/* Dark mode input focus */
+.dark input:focus,
+.dark select:focus,
+.dark textarea:focus {
+    border-color: #6366f1;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+}
+
+/* Notification animation */
+.notification-enter {
+    animation: slideInRight 0.3s ease-out;
+}
+
+.notification-exit {
+    animation: slideOutRight 0.3s ease-in;
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideOutRight {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+}
+
+/* Loading modal */
+#loadingModal {
+    backdrop-filter: blur(8px);
+}
+
+/* Improve select dropdown styling */
+select {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+    background-position: right 0.5rem center;
+    background-repeat: no-repeat;
+    background-size: 1.5em 1.5em;
+    padding-right: 2.5rem;
+}
+
+.dark select {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%239ca3af' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+}
+
+/* Card icon styling */
+.card-icon-container {
+    transition: all 0.3s ease-in-out;
+}
+
+.bg-white:hover .card-icon-container,
+.dark .bg-gray-800:hover .card-icon-container {
+    transform: scale(1.1);
+}
+
+/* Submit button gradient animation */
+.bg-gradient-to-r {
+    background-size: 200% 200%;
+    animation: gradient 3s ease infinite;
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Responsive improvements */
+@media (max-width: 768px) {
+    #map {
+        height: 250px !important;
+    }
+    
+    .grid.grid-cols-2.gap-4 {
+        grid-template-columns: 1fr;
+    }
+    
+    .grid.grid-cols-1.lg\\:grid-cols-2 {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.dark ::-webkit-scrollbar-track {
+    background: #1f2937;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+    background: #4b5563;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+    background: #6b7280;
+}
+
+/* File input styling */
+input[type="file"] {
+    cursor: pointer;
+}
+
+/* Leaflet marker popup */
+.leaflet-popup-content-wrapper {
+    border-radius: 8px;
+}
+
+.dark .leaflet-popup-content-wrapper {
+    background-color: #1f2937;
+    color: #f3f4f6;
+}
+
+.dark .leaflet-popup-tip {
+    background-color: #1f2937;
+}
+
+/* Disabled state styling */
+select:disabled,
+input:disabled,
+textarea:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    background-color: #f3f4f6;
+}
+
+.dark select:disabled,
+.dark input:disabled,
+.dark textarea:disabled {
+    background-color: #1f2937;
+}
+
+/* Focus visible for accessibility */
+*:focus-visible {
+    outline: 2px solid #818cf8;
+    outline-offset: 2px;
+}
+
+.dark *:focus-visible {
+    outline-color: #6366f1;
+}
+
+/* Smooth page transitions */
+body {
+    transition: background-color 0.3s ease-in-out;
+}
+
+/* Edit mode specific styles */
+.edit-mode-highlight {
+    border-left: 4px solid #818cf8;
+    padding-left: 1rem;
+}
+
+.dark .edit-mode-highlight {
+    border-left-color: #6366f1;
+}

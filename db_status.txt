@@ -1,0 +1,1 @@
+[{"Field":"status","Type":"enum('pending_parent','parent_rejected','pending_ai','ai_valid','teacher_valid','teacher_rejected')","Null":"NO","Key":"","Default":"pending_parent","Extra":""}]
