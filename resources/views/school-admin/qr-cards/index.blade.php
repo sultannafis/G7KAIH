@@ -112,7 +112,7 @@
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
                             Simpan Pengaturan
                         </button>
-                        <button type="button" onclick="confirmResetSettings()"
+                        <button type="button" onclick="if(confirm('Reset semua pengaturan kartu QR ke setelan awal?\n\nIni akan:\n• Menghapus background & logo yang diunggah\n• Mengembalikan logo ke default\n• Mereset posisi & ukuran logo ke default')) { document.getElementById('reset-settings-form').submit(); }"
                                 class="w-full flex items-center justify-center gap-2 py-2.5 rounded-2xl text-sm font-bold text-red-500 transition-all hover:bg-red-50"
                                 style="border:1.5px solid rgba(252,165,165,.5);background:rgba(255,241,241,.4)">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
@@ -123,12 +123,16 @@
                 {{-- Hidden position & size fields (diisi JS dari logo editor) --}}
                 <input type="hidden" name="qr_logo1_x"    id="f-l1x" value="{{ $school->qr_logo1_x    ?? 25 }}">
                 <input type="hidden" name="qr_logo1_y"    id="f-l1y" value="{{ $school->qr_logo1_y    ?? 50 }}">
-                <input type="hidden" name="qr_logo2_x"    id="f-l2x" value="{{ $school->qr_logo2_x    ?? 65 }}">
+                <input type="hidden" name="qr_logo2_x"    id="f-l2x" value="{{ $school->qr_logo2_x    ?? 75 }}">
                 <input type="hidden" name="qr_logo2_y"    id="f-l2y" value="{{ $school->qr_logo2_y    ?? 50 }}">
                 <input type="hidden" name="qr_logo1_size" id="f-l1s" value="{{ $school->qr_logo1_size ?? 15 }}">
                 <input type="hidden" name="qr_logo2_size" id="f-l2s" value="{{ $school->qr_logo2_size ?? 15 }}">
             </form>
         </div>
+        
+        <form id="reset-settings-form" action="{{ route('school-admin.qr-cards.settings.reset') }}" method="POST" class="hidden">
+            @csrf
+        </form>
     </div>
 
     {{-- ════════════════════════════════════════════════════════════ --}}
@@ -506,7 +510,7 @@
             size: {{ $school->qr_logo1_size ?? 15 }},
         },
         2: {
-            x:    {{ $school->qr_logo2_x    ?? 65 }},
+            x:    {{ $school->qr_logo2_x    ?? 75 }},
             y:    {{ $school->qr_logo2_y    ?? 50 }},
             size: {{ $school->qr_logo2_size ?? 15 }},
         }
@@ -539,27 +543,6 @@
         r.readAsDataURL(file);
     }
 
-    // ── Reset Pengaturan (kirim ke server → hapus file + DB) ────────
-    function confirmResetSettings() {
-        if (!confirm(
-            'Reset semua pengaturan kartu QR ke setelan awal?\n\n' +
-            'Ini akan:\n' +
-            '• Menghapus background & logo yang diunggah\n' +
-            '• Mengembalikan ke foto default bawaan sistem\n' +
-            '• Mereset posisi & ukuran logo ke default'
-        )) return;
-
-        const form = document.createElement('form');
-        form.method = 'POST';
-        form.action = '{{ route("school-admin.qr-cards.settings.reset") }}';
-        const csrf = document.createElement('input');
-        csrf.type = 'hidden';
-        csrf.name = '_token';
-        csrf.value = '{{ csrf_token() }}';
-        form.appendChild(csrf);
-        document.body.appendChild(form);
-        form.submit();
-    }
 
     // ── Per-page selector ────────────────────────────────────────────
     function setPerPage(n) {

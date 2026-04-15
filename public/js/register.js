@@ -11,7 +11,7 @@ class RegistrationForm {
         this.currentEmail = '';
         this.map = null;
         this.marker = null;
-        
+
         this.init();
     }
 
@@ -27,11 +27,11 @@ class RegistrationForm {
     initMap() {
         // Default to Indonesia center
         this.map = L.map('map').setView([-2.5489, 118.0149], 5);
-        
+
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '© OpenStreetMap contributors'
         }).addTo(this.map);
-        
+
         // Add click event to map
         this.map.on('click', (e) => {
             this.handleMapClick(e);
@@ -44,10 +44,10 @@ class RegistrationForm {
     handleMapClick(e) {
         const lat = e.latlng.lat;
         const lng = e.latlng.lng;
-        
+
         $('#latitude').val(lat.toFixed(6));
         $('#longitude').val(lng.toFixed(6));
-        
+
         // Update or add marker
         if (this.marker) {
             this.marker.setLatLng([lat, lng]);
@@ -55,7 +55,7 @@ class RegistrationForm {
             this.marker = L.marker([lat, lng], {
                 draggable: true
             }).addTo(this.map);
-            
+
             // Add dragend event
             this.marker.on('dragend', (event) => {
                 const position = this.marker.getLatLng();
@@ -63,7 +63,7 @@ class RegistrationForm {
                 $('#longitude').val(position.lng.toFixed(6));
             });
         }
-        
+
         // Reverse geocode to get address
         this.reverseGeocode(lat, lng);
     }
@@ -81,18 +81,18 @@ class RegistrationForm {
                     Swal.showLoading();
                 }
             });
-            
+
             navigator.geolocation.getCurrentPosition(
                 (position) => {
                     const lat = position.coords.latitude;
                     const lng = position.coords.longitude;
-                    
+
                     $('#latitude').val(lat.toFixed(6));
                     $('#longitude').val(lng.toFixed(6));
-                    
+
                     // Center map on location
                     this.map.setView([lat, lng], 15);
-                    
+
                     // Update or add marker
                     if (this.marker) {
                         this.marker.setLatLng([lat, lng]);
@@ -100,14 +100,14 @@ class RegistrationForm {
                         this.marker = L.marker([lat, lng], {
                             draggable: true
                         }).addTo(this.map);
-                        
+
                         this.marker.on('dragend', (event) => {
                             const position = this.marker.getLatLng();
                             $('#latitude').val(position.lat.toFixed(6));
                             $('#longitude').val(position.lng.toFixed(6));
                         });
                     }
-                    
+
                     this.reverseGeocode(lat, lng);
                     Swal.close();
                 },
@@ -139,7 +139,7 @@ class RegistrationForm {
                     let addressParts = [];
                     if (data.address.road) addressParts.push(data.address.road);
                     if (data.address.house_number) addressParts.push(data.address.house_number);
-                    
+
                     if (addressParts.length > 0) {
                         $('#address_detail').val(addressParts.join(' '));
                     }
@@ -213,7 +213,7 @@ class RegistrationForm {
      */
     sendOTP() {
         const email = $('#email').val().trim();
-        
+
         if (!email) {
             Swal.fire('Error', 'Silakan masukkan email terlebih dahulu', 'error');
             return;
@@ -225,7 +225,7 @@ class RegistrationForm {
         }
 
         this.currentEmail = email;
-        
+
         const $btn = $('#btnSendOtp');
         $btn.prop('disabled', true).html('<span class="spinner-border spinner-border-sm me-2"></span>Mengirim...');
 
@@ -242,16 +242,16 @@ class RegistrationForm {
                 $('#otp').val('');
                 this.timeLeft = 300;
                 this.startCountdown();
-                
+
                 $('#otp').prop('disabled', false);
                 $('#btnVerifyOtp').prop('disabled', false);
                 $('#btnResendOtp').prop('disabled', false);
-                
+
                 $('#verificationStatus').html('');
                 this.emailVerified = false;
                 $('#emailVerified').val('0');
                 $('#btnRegister').prop('disabled', true);
-                
+
                 Swal.fire('Berhasil', 'Kode OTP telah dikirim ke email Anda', 'success');
                 $btn.prop('disabled', false).html('<i class="fas fa-paper-plane me-1"></i> Kirim Kode');
             },
@@ -299,9 +299,9 @@ class RegistrationForm {
                     this.emailVerified = true;
                     $('#emailVerified').val('1');
                     $('#btnRegister').prop('disabled', false);
-                    
+
                     clearInterval(this.countdownInterval);
-                    
+
                     $('#verificationStatus').html(
                         '<div class="alert alert-success d-flex align-items-center mb-0 p-3">' +
                         '<i class="fas fa-check-circle fa-2x me-3 text-success"></i>' +
@@ -311,11 +311,11 @@ class RegistrationForm {
                         '</div>' +
                         '</div>'
                     );
-                    
+
                     $('#otp').prop('disabled', true);
                     $btn.prop('disabled', true).html('<i class="fas fa-check-circle me-1"></i> Terverifikasi');
                     $('#btnResendOtp').prop('disabled', true);
-                    
+
                     Swal.fire({
                         icon: 'success',
                         title: 'Berhasil!',
@@ -344,7 +344,7 @@ class RegistrationForm {
      */
     resendOTP() {
         const email = $('#email').val().trim();
-        
+
         if (!email) {
             Swal.fire('Error', 'Email tidak ditemukan', 'error');
             return;
@@ -370,7 +370,7 @@ class RegistrationForm {
                 this.emailVerified = false;
                 $('#emailVerified').val('0');
                 $('#btnRegister').prop('disabled', true);
-                
+
                 Swal.fire('Berhasil', 'Kode OTP baru telah dikirim', 'success');
                 $btn.prop('disabled', false).html('<i class="fas fa-redo me-1"></i> Kirim Ulang');
             },
@@ -436,7 +436,7 @@ class RegistrationForm {
      */
     submitForm(e) {
         e.preventDefault();
-        
+
         if (!this.validateForm()) {
             return false;
         }
@@ -465,9 +465,9 @@ class RegistrationForm {
                 const $submitBtn = $('#btnRegister');
                 $submitBtn.prop('disabled', true)
                     .html('<span class="spinner-border spinner-border-sm me-2"></span>Mendaftarkan...');
-                
+
                 const formData = new FormData(document.getElementById('registerForm'));
-                
+
                 $.ajax({
                     url: $('#registerForm').attr('action'),
                     method: 'POST',
@@ -484,7 +484,7 @@ class RegistrationForm {
                     error: (xhr) => {
                         $submitBtn.prop('disabled', false)
                             .html('<i class="fas fa-paper-plane me-2"></i> Daftarkan Sekolah');
-                        
+
                         let message = 'Terjadi kesalahan saat mendaftar';
                         if (xhr.responseJSON && xhr.responseJSON.message) {
                             message = xhr.responseJSON.message;
@@ -502,7 +502,7 @@ class RegistrationForm {
                                 message = xhr.responseText.substring(0, 200);
                             }
                         }
-                        
+
                         Swal.fire({
                             icon: 'error',
                             title: 'Error',
@@ -513,7 +513,7 @@ class RegistrationForm {
                 });
             }
         });
-        
+
         return false;
     }
 
@@ -559,7 +559,7 @@ class RegistrationForm {
 
         // Validasi required fields
         const requiredFields = [
-            'school_name', 'province_id', 'city_id', 
+            'school_name', 'province_id', 'city_id',
             'district_id', 'village_id', 'address_detail',
             'admin_name', 'timezone'
         ];
@@ -598,11 +598,11 @@ class RegistrationForm {
     startCountdown() {
         clearInterval(this.countdownInterval);
         this.updateCountdownDisplay();
-        
+
         this.countdownInterval = setInterval(() => {
             this.timeLeft--;
             this.updateCountdownDisplay();
-            
+
             if (this.timeLeft <= 0) {
                 clearInterval(this.countdownInterval);
                 $('#countdown').text('Kadaluarsa');
@@ -635,7 +635,7 @@ class RegistrationForm {
      */
     setupFieldValidation() {
         // NPSN validation
-        $('#npsn').on('input', function() {
+        $('#npsn').on('input', function () {
             const npsn = $(this).val();
             if (npsn.length === 8 && /^\d+$/.test(npsn)) {
                 $(this).removeClass('is-invalid').addClass('is-valid');
@@ -647,7 +647,7 @@ class RegistrationForm {
         });
 
         // Phone validation
-        $('#phone_number').on('input', function() {
+        $('#phone_number').on('input', function () {
             const phone = $(this).val();
             if (phone && /^\d{10,13}$/.test(phone)) {
                 $(this).removeClass('is-invalid').addClass('is-valid');
@@ -662,7 +662,7 @@ class RegistrationForm {
         $('#password, #password_confirmation').on('input', () => {
             const password = $('#password').val();
             const confirmPassword = $('#password_confirmation').val();
-            
+
             if (password.length >= 8) {
                 $('#password').removeClass('is-invalid').addClass('is-valid');
             } else if (password.length > 0) {
@@ -670,7 +670,7 @@ class RegistrationForm {
             } else {
                 $('#password').removeClass('is-valid is-invalid');
             }
-            
+
             if (confirmPassword === password && password.length >= 8) {
                 $('#password_confirmation').removeClass('is-invalid').addClass('is-valid');
             } else if (confirmPassword.length > 0) {
@@ -720,6 +720,6 @@ class RegistrationForm {
 }
 
 // Initialize when document is ready
-$(document).ready(function() {
+$(document).ready(function () {
     new RegistrationForm();
 });
