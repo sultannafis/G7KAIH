@@ -236,15 +236,9 @@ class MyClassController extends Controller
 
     protected function getPredikat(string $habitName, int $activeDays, int $pct): string
     {
-        $name = strtolower($habitName);
-        if (str_contains($name, 'sholat') || str_contains($name, 'ibadah')) {
-            if ($pct >= 71) return 'Sudah Terbiasa';
-            if ($pct >= 36) return 'Terbiasa';
-            return 'Belum Terbiasa';
-        }
-        if ($activeDays >= 25) return 'Sudah Terbiasa';
-        if ($activeDays >= 10) return 'Terbiasa';
-        if ($activeDays > 0)   return 'Belum Terbiasa';
-        return '-';
+        if ($activeDays == 0 && $pct == 0) return '-';
+        if ($pct >= 70) return 'Sudah Terbiasa';
+        if ($pct >= 36) return 'Terbiasa';
+        return 'Belum Terbiasa';
     }
 }

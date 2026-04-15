@@ -581,7 +581,7 @@
 <div class="bench" style="font-size:7.5px;margin-bottom:0">
     <strong>Acuan Predikat (Poin Bulanan):</strong>
     @foreach($habitRecap as $r)
-        <strong>{{ $r['habit']->name }}</strong> ≥70% Sudah Terbiasa, 10–24 Terbiasa, &lt;10 Belum
+        <strong>{{ $r['habit']->name }}</strong>: ≥70% Sudah Terbiasa &bull; 36–69% Terbiasa &bull; &lt;36% Belum Terbiasa
         @if(!$loop->last) &nbsp;|&nbsp; @endif
     @endforeach
 </div>

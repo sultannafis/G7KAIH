@@ -127,10 +127,10 @@
                     <img src="{{ asset('images/G7KAIH-Blue.png') }}" alt="G7KAIH Logo Besar" class="w-64 md:w-80 h-auto mx-auto drop-shadow-2xl hover:scale-105 transition-transform duration-700">
                 </div>
                 <div data-aos="fade-left">
-                    <h2 class="text-sky-500 font-bold tracking-widest uppercase text-sm mb-3">Tentang Gerakan</h2>
-                    <h3 class="text-3xl md:text-4xl font-bold text-slate-900 mb-6">Mengenal G7KAIHLebih Dekat</h3>
+                    <h2 class="text-sky-500 font-bold tracking-widest uppercase text-sm mb-3">Tentang G7KAIH</h2>
+                    <h3 class="text-3xl md:text-4xl font-bold text-slate-900 mb-6">Mengenal G7KAIH Lebih Dekat</h3>
                     <p class="text-lg text-slate-600 mb-6 leading-relaxed text-justify">
-                        <strong>Gerakan Tujuh Kebiasaan Anak Indonesia Hebat (GiatTKAIH)</strong> adalah inisiatif nasional yang dicanangkan bersama melalui Surat Edaran Bersama Kementerian Pendidikan Dasar dan Menengah, Kementerian Dalam Negeri, dan Kementerian Agama RI.
+                        <strong>Gerakan Tujuh Kebiasaan Anak Indonesia Hebat (G7KAIH)</strong> adalah inisiatif nasional yang dicanangkan bersama melalui Surat Edaran Bersama Kementerian Pendidikan Dasar dan Menengah, Kementerian Dalam Negeri, dan Kementerian Agama RI.
                     </p>
                     <p class="text-lg text-slate-600 mb-8 leading-relaxed text-justify">
                         Gerakan ini bertujuan melahirkan dampak ganda melalui <strong>Perubahan Intrinsik</strong> (pembentukan kesadaran diri, <em>self-direction</em>, disiplin, mindset belajar) dan <strong>Perubahan Ekstrinsik</strong> (motivasi konsisten dari ekosistem guru, orang tua, ruang publik). Seluruh ikhtiar tersebut tidak dicapai dalam semalam, melainkan dipupuk melalui siklus <strong>Pembiasaan Konsisten Berkelanjutan</strong> yang didukung secara penuh oleh teknologi digital di platform kami.
