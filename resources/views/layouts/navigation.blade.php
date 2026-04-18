@@ -327,7 +327,7 @@
                                     <div class="w-8 h-8 rounded-lg bg-sky-100 flex items-center justify-center group-hover:bg-sky-500 transition-colors shrink-0">
                                         <svg class="w-4 h-4 text-sky-600 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                                     </div>
-                                    <span>Riwayat Submission</span>
+                                    <span>Riwayat Kebiasaan</span>
                                 </a>
                             </div>
                         </div>
@@ -608,7 +608,7 @@
                         @endforeach
                         <a href="{{ route('student.habits.history') }}" class="flex items-center gap-2.5 px-3 py-2 rounded-xl text-sm font-medium text-sky-600 hover:bg-sky-50 transition-colors">
                             <svg class="w-4 h-4 shrink-0 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                            Riwayat Submission
+                            Riwayat Kebiasaan
                         </a>
                     </div>
                 </div>

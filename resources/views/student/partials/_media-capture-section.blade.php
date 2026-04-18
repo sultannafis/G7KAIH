@@ -7,7 +7,7 @@
 {{-- Hidden file input --}}
 <input type="file" name="proof" :id="inputId + '_hidden'"
        x-ref="hiddenProofInput" class="sr-only"
-       accept="image/jpg,image/jpeg,image/png,image/webp,video/mp4,video/quicktime,video/x-m4v">
+       accept="image/jpg,image/jpeg,image/png,image/webp,video/mp4,video/quicktime,video/x-m4v,video/webm">
 
 <div class="mc-section-head">
     <div class="mc-section-icon">
@@ -137,7 +137,7 @@
         <div x-show="mediaType === 'video'">
             <template x-if="!fileName">
                 <label class="mc-dropzone mc-dropzone--video">
-                    <input type="file" accept="video/mp4,video/quicktime,video/x-m4v"
+                    <input type="file" accept="video/mp4,video/quicktime,video/x-m4v,video/webm"
                            class="sr-only" @change="onFileChange($event)">
                     <div class="mc-dropzone-inner">
                         <div class="mc-dz-icon-wrap mc-dz-icon-wrap--video">
@@ -146,7 +146,7 @@
                             </svg>
                         </div>
                         <p class="mc-dz-title">Klik untuk pilih video</p>
-                        <p class="mc-dz-sub">MP4, MOV &mdash; Maks. 20 MB</p>
+                        <p class="mc-dz-sub">MP4, MOV, WEBM &mdash; Maks. 20 MB</p>
                         <div class="mc-dz-btn mc-dz-btn--video">
                             <svg width="11" height="11" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/>
@@ -392,7 +392,7 @@
                 <svg width="11" height="11" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M15 10l4.553-2.069A1 1 0 0121 8.845v6.31a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/>
                 </svg>
-                Video maks. 20 MB &nbsp;&middot;&nbsp; MP4, MOV
+                Video maks. 20 MB &nbsp;&middot;&nbsp; MP4, MOV, WEBM
             </div>
         </template>
     </div>

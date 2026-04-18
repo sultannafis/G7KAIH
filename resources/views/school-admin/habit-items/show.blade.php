@@ -102,9 +102,10 @@
                 $habitItemService = app(App\Services\G7KAIH\HabitItemService::class);
                 $isPrayerItem     = $habitItemService->isPrayerItem($item);
                 $prayerField      = $isPrayerItem ? $habitItemService->getApiPrayerFieldName($item) : null;
-                $rulesCount       = $item->rules->count();
-                $timeRules        = $item->rules->where('rule_type', 'time')->sortBy('priority');
-                $manualRules      = $item->rules->where('rule_type', '!=', 'time')->sortBy('priority');
+                $allRules         = $item->rules->concat($item->habit->directRules ?? collect());
+                $rulesCount       = $allRules->count();
+                $timeRules        = $allRules->where('rule_type', 'time')->sortBy('priority');
+                $manualRules      = $allRules->where('rule_type', '!=', 'time')->sortBy('priority');
             @endphp
 
             {{-- ── Informasi Item ── --}}
@@ -343,7 +344,7 @@
 
                         {{-- Mobile cards --}}
                         <div class="space-y-3 md:hidden">
-                            @foreach($item->rules->sortBy('priority') as $rule)
+                            @foreach($allRules->sortBy('priority') as $rule)
                                 <div class="rounded-2xl p-4" style="background:rgba(240,249,255,.6);border:1px solid rgba(186,230,253,.4)">
                                     <div class="flex items-start justify-between gap-2 mb-2">
                                         <p class="text-sm font-bold text-sky-800">{{ $rule->name }}</p>
@@ -422,7 +423,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($item->rules->sortBy('priority') as $rule)
+                                    @foreach($allRules->sortBy('priority') as $rule)
                                         @php
                                             $pLabel = match(true) { $rule->priority == 1 => ['Tinggi','text-red-500'], $rule->priority == 2 => ['Sedang','text-amber-500'], default => ['Rendah','text-emerald-500'] };
                                         @endphp

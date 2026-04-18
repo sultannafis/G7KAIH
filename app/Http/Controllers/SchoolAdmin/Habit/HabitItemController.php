@@ -29,7 +29,7 @@ class HabitItemController extends Controller
 
         $query = HabitItem::whereHas('habit', function ($q) use ($school) {
             $q->where('school_id', $school->id);
-        })->with(['habit', 'rules']);
+        })->with(['habit.directRules', 'rules']);
 
         // Filter habit_id
         if ($request->filled('habit_id')) {

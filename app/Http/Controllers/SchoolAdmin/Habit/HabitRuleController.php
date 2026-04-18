@@ -41,13 +41,22 @@ class HabitRuleController extends Controller
         });
 
     if ($request->filled('habit_id')) {
-        $query->whereHas('habitItem', function ($q) use ($request) {
-            $q->where('habit_id', $request->habit_id);
-        });
+        $query->where('habit_id', $request->habit_id);
     }
 
     if ($request->filled('habit_item_id')) {
-        $query->where('habit_item_id', $request->habit_item_id);
+        $habitItem = HabitItem::find($request->habit_item_id);
+        if ($habitItem) {
+            $query->where(function ($q) use ($habitItem) {
+                $q->where('habit_item_id', $habitItem->id)
+                  ->orWhere(function ($q2) use ($habitItem) {
+                      $q2->where('habit_id', $habitItem->habit_id)
+                         ->whereNull('habit_item_id');
+                  });
+            });
+        } else {
+            $query->where('habit_item_id', $request->habit_item_id); // fallback
+        }
     }
 
     $rules = $query->orderBy('priority')->paginate($perPage)->withQueryString();

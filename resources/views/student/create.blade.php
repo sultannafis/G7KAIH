@@ -697,14 +697,23 @@
             async startCamera() {
                 try {
                     this.stopCamera();
+                    const video = this.$refs.cameraVideo;
+                    if (video) { video.srcObject = null; }
+                    
                     /* Minta resolusi kotak (1:1) agar sesuai viewfinder */
                     this.stream = await navigator.mediaDevices.getUserMedia({
                         video: { facingMode: this.facingMode, width: { ideal: 1080 }, height: { ideal: 1080 } },
                         audio: this.mediaType === 'video',
                     });
+                    
                     await this.$nextTick();
-                    const video = this.$refs.cameraVideo;
-                    if (video) { video.srcObject = this.stream; video.play(); }
+                    if (video) { 
+                        video.srcObject = this.stream; 
+                        /* Ensure muted is set before playing for Safari autoplay policies */
+                        video.muted = true;
+                        video.setAttribute('playsinline', '');
+                        video.play().catch(e => console.error('Play error:', e)); 
+                    }
                     this.captureState = 'streaming';
                 } catch (err) {
                     console.error('Camera error:', err);
@@ -778,7 +787,7 @@
                 this.recordedChunks = []; this.recordingSeconds = 0;
                 const inp = document.getElementById(this.inputId + '_hidden');
                 if (inp) inp.value = '';
-                if (this.mode === 'camera') { this.captureState = 'streaming'; this.$nextTick(() => this.startCamera()); }
+                if (this.mode === 'camera') { this.captureState = 'idle'; this.$nextTick(() => this.startCamera()); }
                 else { this.captureState = 'idle'; }
             },
 

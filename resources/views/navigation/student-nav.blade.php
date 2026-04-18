@@ -98,7 +98,7 @@
             <a href="{{ route('student.habits.history') }}"
                class="flex items-center px-4 py-3 text-sm hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors {{ request()->routeIs('student.habits.history') ? 'text-emerald-700 font-semibold' : 'text-gray-600 dark:text-gray-400' }}">
                 <svg class="w-5 h-5 mr-3 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                Riwayat Submission
+                Riwayat Kebiasaan
             </a>
         </div>
     </div>

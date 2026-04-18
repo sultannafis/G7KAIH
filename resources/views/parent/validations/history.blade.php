@@ -61,7 +61,7 @@
                     <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
                     <span class="text-slate-600">Riwayat</span>
                 </div>
-                <h1 class="text-xl font-extrabold text-slate-800 tracking-tight">Riwayat Submission</h1>
+                <h1 class="text-xl font-extrabold text-slate-800 tracking-tight">Riwayat Kebiasaan</h1>
                 <p class="text-xs text-slate-400 mt-0.5">Semua submission kebiasaan anakmu</p>
             </div>
             <div class="tab-bar self-start">

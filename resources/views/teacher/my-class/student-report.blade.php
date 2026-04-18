@@ -247,7 +247,7 @@
 {{-- ── Screen toolbar ── --}}
 <div class="screen-toolbar no-print">
     <div>
-        <div class="toolbar-title">{{ $student->user->name }} — Laporan Kegiatan</div>
+        <div class="toolbar-title">{{ $student->user->name }} Laporan Kebiasaan</div>
         <div class="toolbar-subtitle">{{ $dateFrom->format('d M Y') }} s/d {{ $dateTo->format('d M Y') }} &nbsp;&middot;&nbsp; {{ $myClass->name }}</div>
     </div>
     <div class="toolbar-actions">
@@ -275,7 +275,7 @@
 {{-- ── Kop laporan ── --}}
 <div class="report-header">
     <div class="report-title">Laporan Kegiatan Harian Siswa</div>
-    <div class="report-subtitle">7 Kebiasaan Anak Indonesia Hebat — Presensi &amp; Penilaian Kualitas Kegiatan</div>
+    <div class="report-subtitle">7 Kebiasaan Anak Indonesia Hebat Presensi &amp; Penilaian Kualitas Kebiasaan Siswa</div>
     <div class="school-name">{{ $school->name ?? 'Nama Sekolah' }}</div>
 </div>
 

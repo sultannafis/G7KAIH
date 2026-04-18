@@ -437,7 +437,7 @@
                                                     <span class="text-sky-300">· {{ $rule->habitItem->habit->name ?? '-' }}</span>
                                                 </p>
                                             @elseif($rule->habit)
-                                                <p class="text-xs text-sky-400 mt-0.5">{{ $rule->habit->name }} <span class="text-sky-300">· Tanpa Item</span></p>
+                                                <p class="text-xs text-sky-400 mt-0.5">{{ $rule->habit->name }} <span class="text-sky-300">· Semua Item (Multi)</span></p>
                                             @endif
                                         </div>
                                     </div>
@@ -593,8 +593,8 @@
                                             @elseif($rule->habit)
                                                 <div class="text-sm font-bold text-sky-800">{{ $rule->habit->name }}</div>
                                                 <span class="inline-flex items-center px-2 py-0.5 rounded-lg text-xs font-bold mt-0.5"
-                                                      style="background:rgba(224,242,254,.6);color:#0369a1;border:1px solid rgba(186,230,253,.5)">
-                                                    Tanpa Item
+                                                      style="background:rgba(254,243,199,.6);color:#92400e;border:1px solid rgba(253,230,138,.5)">
+                                                    Semua Item (Multi)
                                                 </span>
                                             @else
                                                 <span class="text-sm text-sky-300">—</span>

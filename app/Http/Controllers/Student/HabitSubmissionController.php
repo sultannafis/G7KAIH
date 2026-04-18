@@ -334,7 +334,7 @@ class HabitSubmissionController extends Controller
                 'selected_activities'   => "required|array|min:1|max:{$maxSelect}",
                 'selected_activities.*' => 'required|exists:habit_items,id',
                 'description'           => 'required|string|min:10|max:1000',
-                'proof'                 => 'required|file|mimes:jpg,jpeg,png,webp,mp4,mov|max:20480',
+                'proof'                 => 'required|file|mimes:jpg,jpeg,png,webp,mp4,mov,webm|max:20480',
             ]);
 
             $already = HabitSubmission::where('student_id', $student->id)
@@ -411,7 +411,7 @@ class HabitSubmissionController extends Controller
             : $habit->rules()->whereNull('habit_item_id')->where('rule_type', 'time')->exists();
 
         $rules = [
-            'proof'       => 'required|file|mimes:jpg,jpeg,png,webp,mp4,mov|max:20480',
+            'proof'       => 'required|file|mimes:jpg,jpeg,png,webp,mp4,mov,webm|max:20480',
             'description' => $isTimeBased ? 'nullable|string|max:500' : 'required|string|max:500',
         ];
 

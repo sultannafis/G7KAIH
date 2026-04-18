@@ -102,7 +102,7 @@
 {{-- ── Kop ── --}}
 <div class="report-header">
     <div class="report-title">Laporan Kegiatan Harian Siswa</div>
-    <div class="report-sub">7 Kebiasaan Anak Indonesia Hebat — Presensi &amp; Penilaian Kualitas Kegiatan</div>
+    <div class="report-sub">7 Kebiasaan Anak Indonesia Hebat Presensi &amp; Penilaian Kualitas Kegiatan</div>
     <div class="school-name">{{ $school->name ?? 'Nama Sekolah' }}</div>
 </div>
 

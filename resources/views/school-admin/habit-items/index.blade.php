@@ -198,7 +198,7 @@
                 $totalItems    = $items->total();
                 $activeItems   = $items->getCollection()->where('is_active', true)->count();
                 $inactiveItems = $items->getCollection()->where('is_active', false)->count();
-                $totalRules    = $items->getCollection()->sum(fn($i) => $i->rules->count());
+                $totalRules    = $items->getCollection()->sum(fn($i) => $i->rules->count() + ($i->habit->directRules ? $i->habit->directRules->count() : 0));
             @endphp
             <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-5">
 
@@ -498,7 +498,7 @@
                                     $isPrayerItem     = $habitItemService->isPrayerItem($item);
                                     $prayerField      = $isPrayerItem ? $habitItemService->getApiPrayerFieldName($item) : null;
                                     $no               = $loop->iteration + ($items->currentPage()-1) * $items->perPage();
-                                    $rulesCount       = $item->rules->count();
+                                    $rulesCount       = $item->rules->count() + ($item->habit->directRules ? $item->habit->directRules->count() : 0);
                                 @endphp
                                 <div class="item-card p-4">
                                     <div class="flex items-start justify-between gap-2 mb-2.5">
@@ -643,7 +643,7 @@
                                             $habitItemService = app(App\Services\G7KAIH\HabitItemService::class);
                                             $isPrayerItem     = $habitItemService->isPrayerItem($item);
                                             $prayerField      = $isPrayerItem ? $habitItemService->getApiPrayerFieldName($item) : null;
-                                            $rulesCount       = $item->rules->count();
+                                            $rulesCount       = $item->rules->count() + ($item->habit->directRules ? $item->habit->directRules->count() : 0);
                                         @endphp
                                         <tr class="trow" style="border-bottom:1px solid rgba(186,230,253,.3)">
 

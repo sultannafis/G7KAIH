@@ -99,11 +99,13 @@
         }
 
         .nav-pills {
-            background: transparent; 
+            background: rgba(255, 255, 255, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.5);
             padding: 6px;
             border-radius: 16px;
             margin-bottom: 30px;
             display: flex;
+            gap: 4px;
         }
 
         .nav-pills .nav-link {
@@ -112,9 +114,19 @@
             color: var(--text-muted);
             font-weight: 600;
             font-size: 14px;
-            padding: 10px;
-            transition: all 0.3s cubic--bezier(0.4, 0, 0.2, 1);
+            padding: 10px 4px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: transparent;
+        }
+
+        .nav-pills .nav-link:hover:not(.active) {
+            background: rgba(255, 255, 255, 0.3);
+            color: var(--primary);
         }
 
         .nav-pills .nav-link.active {
@@ -217,15 +229,87 @@
 
         .info-box i { color: var(--primary); margin-top: 2px; }
 
-        /* QR Scanner */
+        /* QR Scanner Modern UI */
+        .scanner-container {
+            position: relative;
+            border-radius: 24px;
+            overflow: hidden;
+            background: #000;
+            box-shadow: 0 15px 35px -5px rgba(30, 136, 229, 0.2);
+            margin: 0 auto 15px auto;
+            width: 100%;
+            max-width: 350px;
+            aspect-ratio: 1 / 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
         #qr-reader {
             width: 100% !important;
+            height: 100% !important;
             border: none !important;
-            border-radius: 20px;
-            overflow: hidden;
-            margin-bottom: 15px;
+            margin: 0 !important;
         }
-        #qr-reader-results { font-size: 13px; text-align: center; }
+        #qr-reader video {
+            object-fit: cover !important;
+            width: 100% !important;
+            height: 100% !important;
+        }
+        /* Sembunyikan styling bawaan yang mengganggu */
+        #qr-reader img { display: none !important; }
+        
+        .scanner-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .scanner-box {
+            position: relative;
+            width: 250px;
+            height: 250px;
+        }
+        .scanner-corners {
+            position: absolute;
+            top: -4px; left: -4px; width: calc(100% + 8px); height: calc(100% + 8px);
+        }
+        .scanner-corners::before, .scanner-corners::after, 
+        .scanner-corners span::before, .scanner-corners span::after {
+            content: '';
+            position: absolute;
+            width: 35px;
+            height: 35px;
+            border-color: var(--primary);
+            border-style: solid;
+        }
+        .scanner-corners::before { top: 0; left: 0; border-width: 4px 0 0 4px; border-top-left-radius: 16px; }
+        .scanner-corners::after { top: 0; right: 0; border-width: 4px 4px 0 0; border-top-right-radius: 16px; }
+        .scanner-corners span::before { bottom: 0; left: 0; border-width: 0 0 4px 4px; border-bottom-left-radius: 16px; }
+        .scanner-corners span::after { bottom: 0; right: 0; border-width: 0 4px 4px 0; border-bottom-right-radius: 16px; }
+
+        .scan-line {
+            position: absolute;
+            top: 0;
+            left: 5%;
+            width: 90%;
+            height: 4px;
+            background: var(--primary);
+            box-shadow: 0 0 10px var(--primary), 0 0 20px var(--primary);
+            animation: scan 2.5s infinite ease-in-out alternate;
+            border-radius: 10px;
+        }
+        @keyframes scan {
+            0% { top: 5%; opacity: 0.8; }
+            50% { opacity: 1; }
+            100% { top: 95%; opacity: 0.8; }
+        }
+        #qr-reader-results { font-size: 14px; font-weight: 600; text-align: center; }
 
         .footer-links {
             text-align: center;
@@ -250,9 +334,16 @@
                 border-radius: 24px;
             }
             .brand-logo { width: 100px; }
-            .nav-pills { flex-direction: column; }
-            .nav-pills .nav-link { margin-bottom: 2px; }
-            .nav-pills .nav-link:last-child { margin-bottom: 0; }
+            .nav-pills .nav-link { 
+                flex-direction: column;
+                font-size: 12px;
+                padding: 8px 4px;
+                gap: 5px;
+            }
+            .nav-pills .nav-link i {
+                margin: 0 !important;
+                font-size: 18px;
+            }
         }
 
         /* ═══ DARK MODE (OS PREFERENCE) ═════════════════════ */
@@ -282,6 +373,13 @@
             .btn-scan {
                 color: var(--primary);
                 border-color: var(--primary);
+            }
+            .nav-pills {
+                background: rgba(15, 23, 42, 0.4);
+                border-color: rgba(255, 255, 255, 0.05);
+            }
+            .nav-pills .nav-link:hover:not(.active) {
+                background: rgba(255, 255, 255, 0.05);
             }
             .nav-pills .nav-link.active {
                 background: #1e293b;
@@ -368,11 +466,21 @@
             </div>
 
             <div id="scannerView" class="hidden text-center">
-                <h5 class="mb-3 font-bold">Scan Barcode Anda</h5>
-                <div id="qr-reader"></div>
-                <div id="qr-reader-results"></div>
-                <button class="btn btn-link text-muted mt-3 underline text-sm" id="stopScannerBtn">
-                    Batal Kembali
+                <h5 class="mb-3 font-bold text-slate-800" style="color: var(--text-main);">Scan Barcode Anda</h5>
+                <div class="scanner-container">
+                    <div id="qr-reader"></div>
+                    <div class="scanner-overlay">
+                        <div class="scanner-box">
+                            <div class="scan-line"></div>
+                            <div class="scanner-corners">
+                                <span></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="qr-reader-results" class="mt-3"></div>
+                <button class="btn btn-link text-muted mt-3 underline text-sm" id="stopScannerBtn" style="font-weight:600; text-decoration:none;">
+                    <i class="fas fa-times-circle"></i> Batal Kembali
                 </button>
             </div>
         </div>
@@ -441,8 +549,8 @@
 
                 const config = {
                     fps: 30,
-                    qrbox: { width: 220, height: 110 },
-                    aspectRatio: 1.7,
+                    qrbox: { width: 250, height: 250 },
+                    aspectRatio: 1.0,
                     formatsToSupport: [
                         Html5QrcodeSupportedFormats.QR_CODE,
                         Html5QrcodeSupportedFormats.CODE_128,
@@ -481,9 +589,11 @@
                 $.ajax({
                     url: '{{ route("login.barcode") }}',
                     method: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
                     data: {
-                        barcode: data,
-                        _token: '{{ csrf_token() }}'
+                        barcode: data
                     },
                     success: function(res) {
                         if (res.success) {
@@ -494,6 +604,11 @@
                         }
                     },
                     error: function(xhr) {
+                        if (xhr.status === 419) {
+                            $('#qr-reader-results').html('<div class="text-danger mt-2">Sesi telah kedaluwarsa. Memuat ulang halaman...</div>');
+                            setTimeout(() => window.location.reload(), 1500);
+                            return;
+                        }
                         const msg = xhr.responseJSON?.message || 'Gagal mengenali barcode.';
                         $('#qr-reader-results').html(`<div class="text-danger mt-2">${msg}</div>`);
                         setTimeout(() => startScanner(), 2000);

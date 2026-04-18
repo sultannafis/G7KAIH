@@ -207,7 +207,7 @@
                                             </svg>
                                             <div>
                                                 <p class="text-[10px] font-black text-sky-700 uppercase tracking-wide">Manual</p>
-                                                <p class="text-[10px] text-sky-500 mt-0.5">Olahraga, Belajar</p>
+                                                <p class="text-[10px] text-sky-500 mt-0.5">Olahraga</p>
                                             </div>
                                         </div>
                                         <div class="flex items-start gap-2 px-3 py-2 rounded-xl" style="background:rgba(255,255,255,.5);border:1px solid rgba(186,230,253,.4)">
@@ -216,7 +216,7 @@
                                             </svg>
                                             <div>
                                                 <p class="text-[10px] font-black text-sky-700 uppercase tracking-wide">Multi-Pilih</p>
-                                                <p class="text-[10px] text-sky-500 mt-0.5">Kegiatan Bermasyarakat</p>
+                                                <p class="text-[10px] text-sky-500 mt-0.5">Kegiatan Bermasyarakat, Belajar</p>
                                             </div>
                                         </div>
                                     </div>
@@ -405,8 +405,8 @@
                         <div class="p-4 sm:p-5 space-y-2">
                             @foreach([
                                 ['Ibadah Sholat', 'Mengaktifkan integrasi API waktu sholat otomatis'],
-                                ['Kegiatan Bermasyarakat', 'Cocok untuk tipe Multi-Pilih'],
-                                ['Olahraga / Belajar', 'Cocok untuk tipe Manual'],
+                                ['Kegiatan Bermasyarakat / Belajar', 'Cocok untuk tipe Multi-Pilih'],
+                                ['Olahraga', 'Cocok untuk tipe Manual'],
                             ] as [$name, $tip])
                             <div class="flex items-start gap-2">
                                 <span class="inline-flex items-center justify-center w-4 h-4 rounded-full mt-0.5 shrink-0"

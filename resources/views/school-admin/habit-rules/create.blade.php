@@ -518,7 +518,7 @@
                                 </div>
                                 <div>
                                     <p class="text-xs font-black text-amber-700">Manual</p>
-                                    <p class="text-[10px] text-amber-500 mt-0.5 leading-relaxed">Cocok untuk Olahraga, Belajar, Multi-Pilih — diinput langsung tanpa batasan waktu</p>
+                                    <p class="text-[10px] text-amber-500 mt-0.5 leading-relaxed">Cocok untuk Olahraga, Multi-Pilih — diinput langsung tanpa batasan waktu</p>
                                 </div>
                             </div>
                             <div class="step-card" style="background:rgba(219,234,254,.4);border-color:rgba(147,197,253,.4)">
