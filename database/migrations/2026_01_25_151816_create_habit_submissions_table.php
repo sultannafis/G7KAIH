@@ -22,8 +22,10 @@ return new class extends Migration
             $table->timestamp('submitted_at');
             $table->string('proof_file')->nullable(); // WAJIB untuk manual
             $table->text('description')->nullable();  // WAJIB untuk manual
-            $table->enum('status', ['pending_parent', 'parent_rejected', 'pending_ai', 'ai_valid', 'teacher_valid', 'teacher_rejected'])->default('pending_parent');
+            $table->enum('status', ['pending_parent', 'parent_rejected', 'pending_ai', 'ai_valid', 'pending_teacher', 'teacher_valid', 'teacher_rejected'])->default('pending_parent');
             $table->integer('point')->nullable();
+            $table->boolean('ai_needs_review')->default(false);
+            $table->unsignedTinyInteger('ai_confidence')->nullable();
             $table->timestamps();
             $table->unique(['student_id', 'habit_id', 'habit_item_id', 'submission_date'],'uniq_submission_daily');
         });

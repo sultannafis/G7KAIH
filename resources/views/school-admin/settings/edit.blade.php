@@ -111,8 +111,8 @@
                                     <label for="logo" class="flex items-center gap-4 cursor-pointer group">
                                         <div class="h-20 w-20 rounded-2xl flex items-center justify-center shrink-0 overflow-hidden transition-all"
                                              style="background:rgba(224,242,254,.6);border:2px dashed rgba(125,211,252,.6)">
-                                            @if($school->logo_path)
-                                                <img id="previewImage" src="{{ asset('storage/' . $school->logo_path) }}"
+                                            @if($school->qr_logo1_path)
+                                                <img id="previewImage" src="{{ asset('storage/' . $school->qr_logo1_path) }}"
                                                      class="w-full h-full object-cover" alt="Logo">
                                             @else
                                                 <div id="logoPlaceholder">

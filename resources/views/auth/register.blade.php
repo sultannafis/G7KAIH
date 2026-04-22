@@ -53,7 +53,7 @@
                                                 class="required-star">*</span>
                                         </label>
                                         <input type="text" class="form-control" id="school_name" name="school_name"
-                                            required placeholder="Masukkan nama sekolah lengkap">
+                                            required placeholder="Masukkan nama sekolah lengkap" style="text-transform: uppercase;" oninput="this.value = this.value.toUpperCase()">
                                         <div class="form-text">Contoh: SD Negeri 1 Jakarta</div>
                                     </div>
 
@@ -64,7 +64,7 @@
                                                 class="required-star">*</span>
                                         </label>
                                         <input type="text" class="form-control" id="npsn" name="npsn" required
-                                            maxlength="8" pattern="\d{8}" placeholder="8 digit NPSN">
+                                            maxlength="8" pattern="\d{8}" placeholder="8 digit NPSN" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
                                         <div class="form-text">Nomor Pokok Sekolah Nasional (8 digit angka)</div>
                                     </div>
                                 </div>
@@ -154,7 +154,7 @@
                                             <i class="fas fa-mail-bulk me-1"></i> Kode Pos
                                         </label>
                                         <input type="text" class="form-control" id="postal_code" name="postal_code"
-                                            placeholder="Contoh: 12345">
+                                            placeholder="Contoh: 12345" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
                                     </div>
 
                                     <!-- Timezone -->
@@ -261,8 +261,13 @@
                                             <i class="fas fa-lock me-1"></i> Password <span
                                                 class="required-star">*</span>
                                         </label>
-                                        <input type="password" class="form-control" id="password" name="password"
-                                            required minlength="8" placeholder="Minimal 8 karakter">
+                                        <div class="input-group">
+                                            <input type="password" class="form-control" id="password" name="password"
+                                                required minlength="8" placeholder="Minimal 8 karakter">
+                                            <button class="btn btn-outline-secondary" type="button" onclick="togglePassword('password', this)" style="border-radius: 0 0.375rem 0.375rem 0;">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                        </div>
                                         <div class="form-text">Gunakan kombinasi huruf, angka, dan simbol</div>
                                     </div>
 
@@ -271,8 +276,13 @@
                                             <i class="fas fa-lock me-1"></i> Konfirmasi Password <span
                                                 class="required-star">*</span>
                                         </label>
-                                        <input type="password" class="form-control" id="password_confirmation"
-                                            name="password_confirmation" required placeholder="Ulangi password">
+                                        <div class="input-group">
+                                            <input type="password" class="form-control" id="password_confirmation"
+                                                name="password_confirmation" required placeholder="Ulangi password">
+                                            <button class="btn btn-outline-secondary" type="button" onclick="togglePassword('password_confirmation', this)" style="border-radius: 0 0.375rem 0.375rem 0;">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -324,6 +334,20 @@
             verificationCheck: '{{ route("verification.check") }}',
             login: '{{ route("login") }}'
         };
+
+        function togglePassword(inputId, btn) {
+            const input = document.getElementById(inputId);
+            const icon = btn.querySelector('i');
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                input.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        }
     </script>
 
     <!-- Custom JavaScript - Pisahkan ke file terpisah -->

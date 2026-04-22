@@ -10,7 +10,6 @@ class School extends Model
         'name',
         'npsn',
         'timezone',
-        'logo_path',
         'status',
         'rejection_reason',
         'is_wa_enabled',
@@ -92,8 +91,8 @@ class School extends Model
 
     public function getLogoUrlAttribute()
     {
-        return $this->logo_path
-            ? asset('storage/' . $this->logo_path)
+        return $this->qr_logo1_path
+            ? asset('storage/' . $this->qr_logo1_path)
             : asset('images/logo smk.png');
     }
 

@@ -92,13 +92,13 @@
                                 <div>
                                     <label class="sky-label">Nama Sekolah *</label>
                                     <input type="text" id="name" name="name" value="{{ old('name', $school->name) }}" required
-                                           class="sky-input" autofocus>
+                                           class="sky-input" autofocus style="text-transform: uppercase;" oninput="this.value = this.value.toUpperCase()">
                                     @error('name')<p class="field-error">{{ $message }}</p>@enderror
                                 </div>
                                 <div>
                                     <label class="sky-label">NPSN *</label>
                                     <input type="text" id="npsn" name="npsn" value="{{ old('npsn', $school->npsn) }}" required
-                                           class="sky-input">
+                                           class="sky-input" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
                                     @error('npsn')<p class="field-error">{{ $message }}</p>@enderror
                                 </div>
                                 <div>
@@ -128,8 +128,8 @@
                                     <label for="logo" class="flex items-center gap-4 cursor-pointer group">
                                         <div class="h-20 w-20 rounded-2xl flex items-center justify-center shrink-0 overflow-hidden transition-all"
                                              style="background:rgba(224,242,254,.6);border:2px dashed rgba(125,211,252,.6)">
-                                            @if($school->logo_path)
-                                                <img id="previewImage" src="{{ asset('storage/' . $school->logo_path) }}"
+                                            @if($school->qr_logo1_path)
+                                                <img id="previewImage" src="{{ asset('storage/' . $school->qr_logo1_path) }}"
                                                      class="w-full h-full object-cover" alt="Logo">
                                             @else
                                                 <div id="logoPlaceholder">
@@ -243,7 +243,7 @@
                                     <label class="sky-label">Kode Pos</label>
                                     <input type="text" id="postal_code" name="postal_code"
                                            value="{{ old('postal_code', $address?->postal_code) }}"
-                                           class="sky-input" placeholder="12345">
+                                           class="sky-input" placeholder="12345" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
                                     @error('postal_code')<p class="field-error">{{ $message }}</p>@enderror
                                 </div>
                             </div>
@@ -252,6 +252,72 @@
 
                     {{-- ── Kolom Kanan ── --}}
                     <div class="space-y-5">
+
+                        {{-- Admin Sekolah --}}
+                        <div class="gc fade-in2 rounded-3xl p-6">
+                            <div class="flex items-center gap-3 mb-6">
+                                <div class="h-10 w-10 rounded-2xl flex items-center justify-center shrink-0"
+                                     style="background:linear-gradient(135deg,#a78bfa,#7c3aed);box-shadow:0 4px 12px rgba(124,58,237,.3)">
+                                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+                                </div>
+                                <div>
+                                    <h3 class="text-base font-black text-sky-800">Admin Sekolah</h3>
+                                    <p class="text-xs text-sky-400">Data pengelola sekolah</p>
+                                </div>
+                            </div>
+                            <div class="space-y-4">
+                                <div>
+                                    <label class="sky-label">Nama Admin *</label>
+                                    <input type="text" id="admin_name" name="admin_name" value="{{ old('admin_name', $admin?->name) }}" required
+                                           class="sky-input" placeholder="Nama lengkap admin">
+                                    @error('admin_name')<p class="field-error">{{ $message }}</p>@enderror
+                                </div>
+                                <div>
+                                    <label class="sky-label">Email *</label>
+                                    <input type="email" id="admin_email" name="admin_email" value="{{ old('admin_email', $admin?->email) }}" required
+                                           class="sky-input" placeholder="admin@sekolah.sch.id">
+                                    @error('admin_email')<p class="field-error">{{ $message }}</p>@enderror
+                                </div>
+                                <div>
+                                    <label class="sky-label">Nomor Telepon</label>
+                                    <input type="text" id="admin_phone" name="admin_phone" value="{{ old('admin_phone', $admin?->phone_number) }}"
+                                           class="sky-input" placeholder="08xx-xxxx-xxxx">
+                                    @error('admin_phone')<p class="field-error">{{ $message }}</p>@enderror
+                                </div>
+                                <div>
+                                    <label class="sky-label">Agama</label>
+                                    <select id="admin_religion" name="admin_religion" class="sky-select">
+                                        <option value="">Pilih Agama</option>
+                                        @foreach(['Islam','Kristen','Katolik','Hindu','Buddha','Konghucu'] as $rel)
+                                            <option value="{{ $rel }}" {{ old('admin_religion', $admin?->religion) == $rel ? 'selected' : '' }}>{{ $rel }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('admin_religion')<p class="field-error">{{ $message }}</p>@enderror
+                                </div>
+                                <div>
+                                    <label class="sky-label">Password</label>
+                                    <div class="relative">
+                                        <input type="password" id="admin_password" name="admin_password"
+                                               class="sky-input pr-10" placeholder="Kosongkan jika tak ingin ganti">
+                                        <button type="button" onclick="togglePassword('admin_password')" class="absolute inset-y-0 right-0 pr-3 flex items-center text-sky-500 hover:text-sky-700" style="margin-top: 0.375rem;">
+                                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" id="icon_admin_password"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                                        </button>
+                                    </div>
+                                    @error('admin_password')<p class="field-error">{{ $message }}</p>@enderror
+                                </div>
+                                <div>
+                                    <label class="sky-label">Konfirmasi Password</label>
+                                    <div class="relative">
+                                        <input type="password" id="admin_password_confirmation" name="admin_password_confirmation"
+                                               class="sky-input pr-10" placeholder="Ulangi jika ganti">
+                                        <button type="button" onclick="togglePassword('admin_password_confirmation')" class="absolute inset-y-0 right-0 pr-3 flex items-center text-sky-500 hover:text-sky-700" style="margin-top: 0.375rem;">
+                                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" id="icon_admin_password_confirmation"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                                        </button>
+                                    </div>
+                                    @error('admin_password_confirmation')<p class="field-error">{{ $message }}</p>@enderror
+                                </div>
+                            </div>
+                        </div>
 
                         {{-- Peta --}}
                         <div class="gc fade-in2 rounded-3xl p-6">
@@ -385,5 +451,17 @@
             district_id: {{ $address?->district_id  ?: 'null' }},
             village_id:  {{ $address?->village_id   ?: 'null' }}
         });
+
+        function togglePassword(inputId) {
+            const input = document.getElementById(inputId);
+            const icon = document.getElementById('icon_' + inputId);
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"/>';
+            } else {
+                input.type = 'password';
+                icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>';
+            }
+        }
     </script>
 </x-app-layout>

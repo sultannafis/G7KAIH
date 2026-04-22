@@ -43,11 +43,11 @@ class SchoolSettingController extends Controller
         try {
             // Handle logo upload
             if ($request->hasFile('logo')) {
-                if ($school->logo_path) {
-                    Storage::disk('public')->delete($school->logo_path);
+                if ($school->qr_logo1_path) {
+                    Storage::disk('public')->delete($school->qr_logo1_path);
                 }
                 $logoPath = $request->file('logo')->store('schools/logos', 'public');
-                $school->logo_path = $logoPath;
+                $school->qr_logo1_path = $logoPath;
             }
 
             // Update school basic details

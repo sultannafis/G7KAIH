@@ -81,7 +81,15 @@ class SchoolController extends Controller
             'admin_email' => 'required|email|unique:users,email',
             'admin_phone' => 'nullable|string|max:20',
             'admin_religion' => 'nullable|string|max:50',
-            'admin_password' => 'required|string|min:8|confirmed',
+            'admin_password' => [
+                'required',
+                'string',
+                'min:8',
+                'regex:/[A-Z]/',
+                'regex:/[0-9]/',
+                'regex:/[@$!%*#?&_]/',
+                'confirmed'
+            ],
         ]);
 
         DB::beginTransaction();
@@ -98,7 +106,7 @@ class SchoolController extends Controller
                 'name' => $validated['name'],
                 'npsn' => $validated['npsn'],
                 'timezone' => $validated['timezone'],
-                'logo_path' => $logoPath,
+                'qr_logo1_path' => $logoPath,
                 'status' => $validated['status'],
             ]);
 
@@ -218,7 +226,15 @@ class SchoolController extends Controller
             ],
             'admin_phone' => 'nullable|string|max:20',
             'admin_religion' => 'nullable|string|max:50',
-            'admin_password' => 'nullable|string|min:8|confirmed',
+            'admin_password' => [
+                'nullable',
+                'string',
+                'min:8',
+                'regex:/[A-Z]/',
+                'regex:/[0-9]/',
+                'regex:/[@$!%*#?&_]/',
+                'confirmed'
+            ],
         ]);
 
         DB::beginTransaction();
@@ -226,12 +242,12 @@ class SchoolController extends Controller
         try {
             // Handle logo upload - SAMA DENGAN STORE
             if ($request->hasFile('logo')) {
-                if ($school->logo_path) {
-                    Storage::disk('public')->delete($school->logo_path);
+                if ($school->qr_logo1_path) {
+                    Storage::disk('public')->delete($school->qr_logo1_path);
                 }
                 
                 $logoPath = $request->file('logo')->store('schools/logos', 'public');
-                $school->logo_path = $logoPath;
+                $school->qr_logo1_path = $logoPath;
             }
 
             // Update school
@@ -317,8 +333,8 @@ class SchoolController extends Controller
         }
 
         DB::transaction(function () use ($school) {
-            if ($school->logo_path) {
-                Storage::disk('public')->delete($school->logo_path);
+            if ($school->qr_logo1_path) {
+                Storage::disk('public')->delete($school->qr_logo1_path);
             }
 
             $school->addresses()->delete();

@@ -122,8 +122,8 @@
                     {{-- School Header Card --}}
                     <div class="gc fade-in rounded-3xl p-6">
                         <div class="flex items-center gap-5">
-                            @if($school->logo_path)
-                                <img src="{{ asset('storage/' . $school->logo_path) }}" alt="{{ $school->name }}"
+                            @if($school->qr_logo1_path)
+                                <img src="{{ asset('storage/' . $school->qr_logo1_path) }}" alt="{{ $school->name }}"
                                      class="h-16 w-16 rounded-2xl object-cover shrink-0" style="border:2px solid rgba(186,230,253,.5)">
                             @else
                                 <div class="h-16 w-16 rounded-2xl flex items-center justify-center shrink-0 text-white font-bold text-2xl"

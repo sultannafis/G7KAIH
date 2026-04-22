@@ -42,7 +42,15 @@ class SchoolRegisterController extends Controller
             'admin_name' => 'required|string|max:255',
             'phone_number' => 'required|string|max:20',
             'email' => 'required|email|unique:users,email',
-            'password' => 'required|string|min:8|confirmed',
+            'password' => [
+                'required',
+                'string',
+                'min:8',
+                'regex:/[A-Z]/',
+                'regex:/[0-9]/',
+                'regex:/[@$!%*#?&_]/',
+                'confirmed'
+            ],
         ], [
             'g-recaptcha-response.required' => 'Harap centang kotak "I\'m not a robot".',
             'npsn.unique' => 'NPSN sudah terdaftar.',
@@ -75,6 +83,12 @@ class SchoolRegisterController extends Controller
 
         if ($validator->fails()) {
             \Log::error('Validation failed:', $validator->errors()->toArray());
+            if ($request->ajax()) {
+                return response()->json([
+                    'message' => 'Terdapat kesalahan pada isian Anda.',
+                    'errors' => $validator->errors()
+                ], 422);
+            }
             return redirect()->back()
                 ->withErrors($validator)
                 ->withInput();

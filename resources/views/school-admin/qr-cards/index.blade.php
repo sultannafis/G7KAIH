@@ -112,7 +112,7 @@
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
                             Simpan Pengaturan
                         </button>
-                        <button type="button" onclick="if(confirm('Reset semua pengaturan kartu QR ke setelan awal?\n\nIni akan:\n• Menghapus background & logo yang diunggah\n• Mengembalikan logo ke default\n• Mereset posisi & ukuran logo ke default')) { document.getElementById('reset-settings-form').submit(); }"
+                        <button type="button" onclick="resetToFactorySettings()"
                                 class="w-full flex items-center justify-center gap-2 py-2.5 rounded-2xl text-sm font-bold text-red-500 transition-all hover:bg-red-50"
                                 style="border:1.5px solid rgba(252,165,165,.5);background:rgba(255,241,241,.4)">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
@@ -129,10 +129,6 @@
                 <input type="hidden" name="qr_logo2_size" id="f-l2s" value="{{ $school->qr_logo2_size ?? 15 }}">
             </form>
         </div>
-        
-        <form id="reset-settings-form" action="{{ route('school-admin.qr-cards.settings.reset') }}" method="POST" class="hidden">
-            @csrf
-        </form>
     </div>
 
     {{-- ════════════════════════════════════════════════════════════ --}}
@@ -521,6 +517,28 @@
         document.getElementById('settings-panel').classList.toggle('hidden');
     }
 
+    // ── Reset Ke Setelan Awal ────────────────────────────────────────
+    function resetToFactorySettings() {
+        g7Confirm('Reset semua pengaturan kartu QR ke setelan awal?\n\nIni akan:\n• Menghapus background & logo yang diunggah\n• Mengembalikan logo ke default\n• Mereset posisi & ukuran logo ke default', {
+            type: 'danger',
+            title: 'Hapus Data',
+            onConfirm: function() {
+                const form = document.createElement('form');
+                form.method = 'POST';
+                form.action = "{{ route('school-admin.qr-cards.settings.reset') }}";
+
+                const csrf = document.createElement('input');
+                csrf.type = 'hidden';
+                csrf.name = '_token';
+                csrf.value = "{{ csrf_token() }}";
+                form.appendChild(csrf);
+
+                document.body.appendChild(form);
+                form.submit();
+            }
+        });
+    }
+
     // ── Preview Image Upload ────────────────────────────────────────
     function previewImg(input, targetId) {
         if (input.files && input.files[0]) {
@@ -690,21 +708,38 @@
     // FIX #3: resetLogoEditor langsung set ke nilai DB saat halaman dimuat
     // (tersimpan di LOGO_DEFAULTS), bukan ke nilai hardcoded {25,65,50}
     function resetLogoEditor() {
-        if (!confirm('Reset posisi dan ukuran logo ke posisi tersimpan terakhir?')) return;
+        g7Confirm('Kembalikan posisi & ukuran logo ke setelan awal pabrikan (default)?\n\nIni akan langsung menyimpan posisi logo ke setelan pabrik.', {
+            type: 'warning',
+            title: 'Kembalikan Setelan',
+            onConfirm: function() {
+                [1, 2].forEach(n => {
+                    const logo   = document.getElementById('le-logo' + n);
+                    const slider = document.getElementById('le-l' + n + '-size');
+                    const label  = document.getElementById('le-l' + n + 's-val');
+                    
+                    const defX    = n === 1 ? 25 : 75;
+                    const defY    = 50;
+                    const defSize = 15;
 
-        [1, 2].forEach(n => {
-            const logo   = document.getElementById('le-logo' + n);
-            const slider = document.getElementById('le-l' + n + '-size');
-            const label  = document.getElementById('le-l' + n + 's-val');
-            const def    = LOGO_DEFAULTS[n];
-
-            if (logo) {
-                logo.style.left  = def.x    + '%';
-                logo.style.top   = def.y    + '%';
-                logo.style.width = def.size + '%';
+                    if (logo) {
+                        logo.style.left  = defX    + '%';
+                        logo.style.top   = defY    + '%';
+                        logo.style.width = defSize + '%';
+                    }
+                    if (slider) slider.value         = defSize;
+                    if (label)  label.textContent    = defSize + '%';
+                    
+                    const hiddenX = document.getElementById('f-l' + n + 'x');
+                    const hiddenY = document.getElementById('f-l' + n + 'y');
+                    const hiddenS = document.getElementById('f-l' + n + 's');
+                    
+                    if (hiddenX) hiddenX.value = defX;
+                    if (hiddenY) hiddenY.value = defY;
+                    if (hiddenS) hiddenS.value = defSize;
+                });
+                
+                applyLogoEditor();
             }
-            if (slider) slider.value         = def.size;
-            if (label)  label.textContent    = def.size + '%';
         });
     }
 
@@ -830,4 +865,14 @@
         }, 3000);
     }
     </script>
+
+    @if(session('success') || session('error'))
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Keep settings panel open after save/reset actions so user gets visual feedback
+            const sp = document.getElementById('settings-panel');
+            if (sp) sp.classList.remove('hidden');
+        });
+    </script>
+    @endif
 </x-app-layout>

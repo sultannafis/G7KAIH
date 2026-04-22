@@ -544,6 +544,9 @@ class RegistrationForm {
         if (password.length < 8) {
             errorMessage += '• Password minimal 8 karakter<br>';
             isValid = false;
+        } else if (!/(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&_])/.test(password)) {
+            errorMessage += '• Password harus memiliki kombinasi huruf besar, angka, dan simbol<br>';
+            isValid = false;
         }
         if (password !== confirmPassword) {
             errorMessage += '• Password dan konfirmasi password tidak cocok<br>';
@@ -662,8 +665,10 @@ class RegistrationForm {
         $('#password, #password_confirmation').on('input', () => {
             const password = $('#password').val();
             const confirmPassword = $('#password_confirmation').val();
+            
+            const isValidPassword = password.length >= 8 && /(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&_])/.test(password);
 
-            if (password.length >= 8) {
+            if (isValidPassword) {
                 $('#password').removeClass('is-invalid').addClass('is-valid');
             } else if (password.length > 0) {
                 $('#password').removeClass('is-valid').addClass('is-invalid');
@@ -671,7 +676,7 @@ class RegistrationForm {
                 $('#password').removeClass('is-valid is-invalid');
             }
 
-            if (confirmPassword === password && password.length >= 8) {
+            if (confirmPassword === password && isValidPassword) {
                 $('#password_confirmation').removeClass('is-invalid').addClass('is-valid');
             } else if (confirmPassword.length > 0) {
                 $('#password_confirmation').removeClass('is-valid').addClass('is-invalid');

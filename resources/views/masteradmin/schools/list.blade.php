@@ -290,8 +290,8 @@
                                     <div class="flex items-start gap-2 min-w-0">
                                         <span class="text-xs font-black text-sky-300 shrink-0 mt-0.5">{{ $no }}.</span>
                                         <div class="flex items-center gap-2.5 min-w-0">
-                                            @if ($school->logo_path)
-                                                <img src="{{ asset('storage/' . $school->logo_path) }}" alt="{{ $school->name }}"
+                                            @if ($school->qr_logo1_path)
+                                                <img src="{{ asset('storage/' . $school->qr_logo1_path) }}" alt="{{ $school->name }}"
                                                      class="h-9 w-9 rounded-xl object-cover shrink-0" style="border:2px solid rgba(186,230,253,.6)">
                                             @else
                                                 <div class="h-9 w-9 rounded-xl shrink-0 flex items-center justify-center text-white font-bold text-xs"
@@ -409,8 +409,8 @@
                                         <td class="py-4 pr-3 text-sm font-bold text-sky-300">{{ $no }}</td>
                                         <td class="py-4 px-3">
                                             <div class="flex items-center gap-3">
-                                                @if ($school->logo_path)
-                                                    <img src="{{ asset('storage/' . $school->logo_path) }}" alt="{{ $school->name }}"
+                                                @if ($school->qr_logo1_path)
+                                                    <img src="{{ asset('storage/' . $school->qr_logo1_path) }}" alt="{{ $school->name }}"
                                                          class="h-10 w-10 rounded-xl object-cover shrink-0" style="border:2px solid rgba(186,230,253,.6)">
                                                 @else
                                                     <div class="h-10 w-10 rounded-xl shrink-0 flex items-center justify-center text-white font-bold text-sm"

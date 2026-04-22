@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->foreignId('student_id')->constrained()->cascadeOnDelete();
             $table->string('family_relationship');
+            $table->string('login_code')->unique()->nullable();
             $table->timestamps();
         });
 
