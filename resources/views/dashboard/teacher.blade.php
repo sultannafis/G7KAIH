@@ -439,19 +439,18 @@
                         </div>
                     </div>
                     <div class="flex items-center gap-3">
-                        <form method="GET" action="{{ url()->current() }}" class="flex items-center gap-2">
-                            @foreach(request()->except(['attention_per_page','attention_page']) as $k => $v)
-                                <input type="hidden" name="{{ $k }}" value="{{ $v }}">
-                            @endforeach
-                            <label class="text-xs font-semibold text-rose-500">Tampil</label>
-                            <select name="attention_per_page" onchange="this.form.submit()"
-                                class="text-xs font-bold text-rose-700 rounded-xl px-2.5 py-1.5 focus:outline-none focus:ring-2 focus:ring-rose-300 cursor-pointer"
-                                style="background:rgba(254,226,226,.6);border:1px solid rgba(252,165,165,.4)">
-                                @foreach([10, 25, 50, 100] as $opt)
-                                <option value="{{ $opt }}" {{ $attentionPerPage == $opt ? 'selected' : '' }}>{{ $opt }}</option>
+                        <div class="flex items-center gap-2">
+                            <span class="text-[10px] sm:text-xs font-semibold text-rose-500 whitespace-nowrap">Tampilkan</span>
+                            <select id="attention-per-page-selector"
+                                    class="px-3 py-1.5 rounded-xl text-sm font-bold text-rose-800 cursor-pointer transition-all"
+                                    style="background:rgba(255,255,255,.75);border:1px solid rgba(252,165,165,.6);outline:none"
+                                    onchange="changeAttentionPerPage(this.value)">
+                                @foreach([10, 25, 50, 100] as $size)
+                                    <option value="{{ $size }}" {{ $attentionPerPage == $size ? 'selected' : '' }}>{{ $size }}</option>
                                 @endforeach
                             </select>
-                        </form>
+                            <span class="text-[10px] sm:text-xs font-semibold text-rose-500 whitespace-nowrap">per hal.</span>
+                        </div>
                         <span class="chip chip-rose">{{ $attentionTotal }} siswa</span>
                     </div>
                 </div>
@@ -624,5 +623,12 @@
         document.getElementById('rejectModal').addEventListener('click', function(e) {
             if (e.target === this) closeRejectModal();
         });
+
+        function changeAttentionPerPage(value) {
+            const url = new URL(window.location.href);
+            url.searchParams.set('attention_per_page', value);
+            url.searchParams.delete('attention_page');
+            window.location.href = url.toString();
+        }
     </script>
 </x-app-layout>

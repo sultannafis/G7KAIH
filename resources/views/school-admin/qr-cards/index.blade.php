@@ -339,7 +339,7 @@
                                style="background:rgba(240,249,255,.7);border:1.5px solid rgba(186,230,253,.6)">Reset</a>
                         </div>
                     </div>
-                    <input type="hidden" name="per_page" id="per-page-hidden" value="{{ request('per_page', 15) }}">
+                    <input type="hidden" name="per_page" id="per-page-hidden" value="{{ request('per_page', 10) }}">
                     @if($classId)
                         <input type="hidden" name="class_id" value="{{ $classId }}">
                     @endif
@@ -356,15 +356,16 @@
                             <span class="text-xs text-sky-400">{{ $students->total() }} siswa ditemukan</span>
                         </div>
                         <div class="flex items-center gap-2">
-                            <span class="text-xs text-sky-500 font-semibold hidden sm:inline">Tampilkan:</span>
-                            @foreach([10, 25, 50, 100] as $pp)
-                                <button type="button"
-                                        onclick="setPerPage({{ $pp }})"
-                                        class="px-2.5 py-1 rounded-lg text-xs font-bold transition-all {{ request('per_page', 15) == $pp ? 'text-white' : 'text-sky-600 hover:bg-sky-100' }}"
-                                        style="{{ request('per_page', 15) == $pp ? 'background:linear-gradient(135deg,#38bdf8,#0ea5e9)' : 'background:rgba(240,249,255,.7);border:1px solid rgba(186,230,253,.6)' }}">
-                                    {{ $pp }}
-                                </button>
-                            @endforeach
+                            <span class="text-[10px] sm:text-xs font-semibold text-sky-400 whitespace-nowrap">Tampilkan</span>
+                            <select id="per-page-selector"
+                                    class="px-3 py-1.5 rounded-xl text-sm font-bold text-sky-800 cursor-pointer transition-all"
+                                    style="background:rgba(255,255,255,.75);border:1px solid rgba(186,230,253,.6);outline:none"
+                                    onchange="changePerPage(this.value)">
+                                @foreach([10, 25, 50, 100] as $size)
+                                    <option value="{{ $size }}" {{ request('per_page', 10) == $size ? 'selected' : '' }}>{{ $size }}</option>
+                                @endforeach
+                            </select>
+                            <span class="text-[10px] sm:text-xs font-semibold text-sky-400 whitespace-nowrap">per hal.</span>
                         </div>
                     </div>
 
@@ -563,9 +564,11 @@
 
 
     // ── Per-page selector ────────────────────────────────────────────
-    function setPerPage(n) {
-        document.getElementById('per-page-hidden').value = n;
-        document.getElementById('filter-form').submit();
+    function changePerPage(value) {
+        const url = new URL(window.location.href);
+        url.searchParams.set('per_page', value);
+        url.searchParams.delete('page');
+        window.location.href = url.toString();
     }
 
     // ── Checkbox Management ─────────────────────────────────────────

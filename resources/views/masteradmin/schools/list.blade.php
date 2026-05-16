@@ -147,7 +147,8 @@
                         <div class="flex items-center gap-2">
                             <span class="text-[10px] sm:text-xs font-semibold text-sky-400 whitespace-nowrap">Tampilkan</span>
                             <select id="per-page-selector"
-                                    class="filter-input px-3 py-1.5 rounded-xl text-sm font-bold text-sky-800 cursor-pointer"
+                                    class="px-3 py-1.5 rounded-xl text-sm font-bold text-sky-800 cursor-pointer transition-all"
+                                    style="background:rgba(255,255,255,.75);border:1px solid rgba(186,230,253,.6);outline:none"
                                     onchange="changePerPage(this.value)">
                                 @foreach([10, 25, 50, 100] as $size)
                                     <option value="{{ $size }}" {{ request('per_page', 10) == $size ? 'selected' : '' }}>{{ $size }}</option>

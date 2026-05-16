@@ -315,19 +315,16 @@
                 <div class="flex items-center justify-between gap-3 mb-4">
                     <p class="text-xs font-bold text-sky-400 uppercase tracking-wider">Filter & Pencarian</p>
                     <div class="flex items-center gap-2">
-                        <span class="text-xs font-semibold text-sky-400 whitespace-nowrap hidden sm:inline">Tampilkan</span>
-                        <form method="GET" action="{{ route('parent.validations.index') }}" id="per-page-form">
-                            @foreach(request()->except(['per_page','page']) as $k=>$v)
-                            <input type="hidden" name="{{ $k }}" value="{{ $v }}">
+                        <span class="text-[10px] sm:text-xs font-semibold text-sky-400 whitespace-nowrap">Tampilkan</span>
+                        <select id="per-page-selector"
+                                class="px-3 py-1.5 rounded-xl text-sm font-bold text-sky-800 cursor-pointer transition-all"
+                                style="background:rgba(255,255,255,.75);border:1px solid rgba(186,230,253,.6);outline:none"
+                                onchange="changePerPage(this.value)">
+                            @foreach([10, 25, 50, 100] as $size)
+                                <option value="{{ $size }}" {{ request('per_page', 10) == $size ? 'selected' : '' }}>{{ $size }}</option>
                             @endforeach
-                            <input type="hidden" name="per_page" id="pp-val" value="{{ request('per_page',10) }}">
-                        </form>
-                        <div class="flex items-center gap-0.5 bg-slate-100 border border-slate-200 rounded-lg p-0.5">
-                            @foreach([10,25,50,100] as $pp)
-                            <button type="button" class="pp-btn {{ request('per_page',10)==$pp?'active':'' }}" onclick="setPerPage({{ $pp }})">{{ $pp }}</button>
-                            @endforeach
-                        </div>
-                        <span class="text-xs font-semibold text-sky-400 whitespace-nowrap hidden sm:inline">baris</span>
+                        </select>
+                        <span class="text-[10px] sm:text-xs font-semibold text-sky-400 whitespace-nowrap">per hal.</span>
                     </div>
                 </div>
 
@@ -709,7 +706,12 @@
 
     <script>
     // ── Per-page ──
-    function setPerPage(v){ document.getElementById('pp-val').value=v; document.getElementById('per-page-form').submit(); }
+    function changePerPage(value) {
+        const url = new URL(window.location.href);
+        url.searchParams.set('per_page', value);
+        url.searchParams.delete('page');
+        window.location.href = url.toString();
+    }
 
     // ── Custom Dropdown ──
     function toggleDD(id){

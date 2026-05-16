@@ -24,7 +24,7 @@ class QrCardController extends Controller
         $classId    = $request->input('class_id');
         $perPage    = in_array($request->input('per_page'), [10, 25, 50, 100])
                         ? (int) $request->input('per_page')
-                        : 15;
+                        : 10;
 
         $query = User::where('school_id', $school->id)
             ->where('role', 'siswa')

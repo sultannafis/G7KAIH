@@ -139,6 +139,7 @@
             {{-- Filter & Search --}}
             <div class="gc section-in rounded-3xl p-5 sm:p-6">
                 <form method="GET" class="space-y-4">
+                    <input type="hidden" name="per_page" value="{{ request('per_page', 10) }}">
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                         <div>
                             <label class="block text-xs font-bold text-sky-600 mb-1.5 uppercase tracking-wider">Cari Kelas</label>
@@ -165,8 +166,8 @@
                                    class="filter-input w-full px-4 py-2.5 rounded-xl text-sm font-medium"/>
                         </div>
 
-                        <div class="flex items-end gap-2">
-                            <button type="submit" class="btn-sky flex-1 flex items-center justify-center gap-2 py-2.5 rounded-xl text-sm font-bold text-white">
+                        <div class="flex items-end gap-2 flex-wrap">
+                            <button type="submit" class="btn-sky flex-1 flex items-center justify-center gap-2 py-2.5 rounded-xl text-sm font-bold text-white min-w-[100px]">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
                                 Cari
                             </button>
@@ -178,6 +179,21 @@
                                 Reset
                             </a>
                             @endif
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center justify-end gap-2 pt-2" style="border-top:1px solid rgba(186,230,253,.3)">
+                        <div class="flex items-center gap-2">
+                            <span class="text-[10px] sm:text-xs font-semibold text-sky-400 whitespace-nowrap">Tampilkan</span>
+                            <select id="per-page-selector"
+                                    class="px-3 py-1.5 rounded-xl text-sm font-bold text-sky-800 cursor-pointer transition-all"
+                                    style="background:rgba(255,255,255,.75);border:1px solid rgba(186,230,253,.6);outline:none"
+                                    onchange="changePerPage(this.value)">
+                                @foreach([10, 25, 50, 100] as $size)
+                                    <option value="{{ $size }}" {{ request('per_page', 10) == $size ? 'selected' : '' }}>{{ $size }}</option>
+                                @endforeach
+                            </select>
+                            <span class="text-[10px] sm:text-xs font-semibold text-sky-400 whitespace-nowrap">per hal.</span>
                         </div>
                     </div>
                 </form>
@@ -344,4 +360,13 @@
 
         </div>
     </div>
+
+    <script>
+        function changePerPage(value) {
+            const url = new URL(window.location.href);
+            url.searchParams.set('per_page', value);
+            url.searchParams.delete('page');
+            window.location.href = url.toString();
+        }
+    </script>
 </x-app-layout>

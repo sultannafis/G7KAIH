@@ -438,19 +438,18 @@
 
                 {{-- Per Page --}}
                 <div class="flex items-center gap-3 w-full sm:w-auto justify-between sm:justify-start">
-                    <form method="GET" action="{{ route('student.habits.history') }}" class="flex items-center gap-2">
-                        @foreach(request()->except('per_page') as $key => $value)
-                            <input type="hidden" name="{{ $key }}" value="{{ $value }}">
-                        @endforeach
-                        <span class="text-xs font-600 text-slate-500">Baris per Halaman</span>
-                        <select name="per_page" id="per_page_sel" onchange="this.form.submit()"
-                                class="text-xs font-700 rounded-lg border px-2 py-1.5 focus:ring-2 focus:ring-sky-500 outline-none transition-all cursor-pointer shadow-sm"
-                                style="background:white; border-color:rgba(56,189,248,.3); color:#0369a1;">
-                            @foreach([10, 25, 50, 100] as $n)
-                            <option value="{{ $n }}" @selected((int)request('per_page', 25) === $n)>{{ $n }}</option>
+                    <div class="flex items-center gap-2">
+                        <span class="text-[10px] sm:text-xs font-semibold text-sky-400 whitespace-nowrap">Tampilkan</span>
+                        <select id="per-page-selector"
+                                class="px-3 py-1.5 rounded-xl text-sm font-bold text-sky-800 cursor-pointer transition-all"
+                                style="background:rgba(255,255,255,.75);border:1px solid rgba(186,230,253,.6);outline:none"
+                                onchange="changePerPage(this.value)">
+                            @foreach([10, 25, 50, 100] as $size)
+                                <option value="{{ $size }}" {{ request('per_page', 25) == $size ? 'selected' : '' }}>{{ $size }}</option>
                             @endforeach
                         </select>
-                    </form>
+                        <span class="text-[10px] sm:text-xs font-semibold text-sky-400 whitespace-nowrap">per hal.</span>
+                    </div>
                 </div>
 
                 {{-- Page Info + Nav --}}
@@ -540,4 +539,13 @@
             a.block:active { background: rgba(56,189,248,.08) !important; }
         }
     </style>
+
+    <script>
+        function changePerPage(value) {
+            const url = new URL(window.location.href);
+            url.searchParams.set('per_page', value);
+            url.searchParams.delete('page');
+            window.location.href = url.toString();
+        }
+    </script>
 </x-app-layout>

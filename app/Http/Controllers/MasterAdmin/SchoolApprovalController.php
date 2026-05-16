@@ -18,15 +18,27 @@ class SchoolApprovalController extends Controller
         $this->notificationService = $notificationService;
     }
 
-    public function index()
+    public function index(Request $request)
     {
+        $perPage = $request->input('per_page', 10);
+        $search = $request->input('search');
+
+        $query = School::where('status', 'pending')
+            ->with(['users' => function ($q) {
+                $q->where('role', 'admin');
+            }]);
+
+        if ($search) {
+            $query->where(function ($q) use ($search) {
+                $q->where('name', 'like', "%{$search}%")
+                  ->orWhereHas('users', function ($u) use ($search) {
+                      $u->where('role', 'admin')->where('name', 'like', "%{$search}%");
+                  });
+            });
+        }
+
         return view('masteradmin.schools.index', [
-            'pendingSchools' => School::where('status', 'pending')
-                ->with(['users' => function ($query) {
-                    $query->where('role', 'admin');
-                }])
-                ->latest()
-                ->paginate(10),
+            'pendingSchools' => $query->latest()->paginate($perPage)->appends($request->query()),
         ]);
     }
 

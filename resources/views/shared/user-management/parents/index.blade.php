@@ -215,6 +215,23 @@
             {{-- Table / Cards (sama seperti sebelumnya, tidak ada perubahan) --}}
             <div class="gc-static rounded-3xl overflow-hidden fade-in4">
                 @if($parents->count() > 0)
+                    <div class="px-4 sm:px-5 py-3 flex flex-wrap items-center justify-between gap-3" style="background:rgba(240,249,255,.4)">
+                        <div class="flex items-center gap-3">
+                            <span class="text-xs text-sky-400 font-semibold">Menampilkan {{ $parents->firstItem() ?? 0 }}–{{ $parents->lastItem() ?? 0 }} dari {{ $parents->total() }} orang tua</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="text-[10px] sm:text-xs font-semibold text-sky-400 whitespace-nowrap">Tampilkan</span>
+                            <select id="per-page-selector"
+                                    class="px-3 py-1.5 rounded-xl text-sm font-bold text-sky-800 cursor-pointer transition-all"
+                                    style="background:rgba(255,255,255,.75);border:1px solid rgba(186,230,253,.6);outline:none"
+                                    onchange="changePerPage(this.value)">
+                                @foreach([10, 25, 50, 100] as $size)
+                                    <option value="{{ $size }}" {{ request('per_page', 10) == $size ? 'selected' : '' }}>{{ $size }}</option>
+                                @endforeach
+                            </select>
+                            <span class="text-[10px] sm:text-xs font-semibold text-sky-400 whitespace-nowrap">per hal.</span>
+                        </div>
+                    </div>
 
                     {{-- DESKTOP & TABLET TABLE --}}
                     <div class="desktop-table overflow-x-auto">
@@ -442,4 +459,13 @@
 
         </div>
     </div>
+
+    <script>
+        function changePerPage(value) {
+            const url = new URL(window.location.href);
+            url.searchParams.set('per_page', value);
+            url.searchParams.delete('page');
+            window.location.href = url.toString();
+        }
+    </script>
 </x-app-layout>

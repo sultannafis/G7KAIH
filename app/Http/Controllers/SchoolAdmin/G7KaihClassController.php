@@ -163,9 +163,22 @@ class G7KaihClassController extends Controller
             abort(403, 'Akses ditolak.');
         }
 
-        $class->load(['teacher', 'students.user']);
+        $class->load(['teacher']);
+        
+        $search = request('search');
+        $students = $class->students()->with('user');
+        
+        if ($search) {
+            $students->whereHas('user', function($q) use ($search) {
+                $q->where('name', 'like', "%{$search}%")
+                  ->orWhere('email', 'like', "%{$search}%");
+            })->orWhere('nisn', 'like', "%{$search}%")
+              ->orWhere('nis', 'like', "%{$search}%");
+        }
+        
+        $students = $students->paginate(request('per_page', 10));
 
-        return view('school-admin.classes.show', compact('class'));
+        return view('school-admin.classes.show', compact('class', 'students', 'search'));
     }
 
     /**

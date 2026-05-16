@@ -122,32 +122,25 @@
                     Menampilkan {{ $templates->firstItem() ?? 0 }}–{{ $templates->lastItem() ?? 0 }}
                     dari {{ $templates->total() }} template
                 </p>
-                <form method="GET" class="flex items-center gap-2">
-                    {{-- Pertahankan filter aktif --}}
-                    @foreach(request()->only(['channel','role','event']) as $key => $val)
-                        @if($val)<input type="hidden" name="{{ $key }}" value="{{ $val }}">@endif
-                    @endforeach
-
-                    <label class="text-xs font-semibold text-sky-600 dark:text-sky-400 whitespace-nowrap">
-                        Tampilkan
-                    </label>
-                    <select name="per_page"
-                            onchange="this.form.submit()"
-                            class="rounded-lg border border-sky-200 dark:border-sky-700
-                                   bg-white/70 dark:bg-sky-950/50 text-sky-900 dark:text-sky-100
-                                   px-2 py-1 text-xs cursor-pointer">
-                        @foreach([10,25,50,100] as $n)
-                        <option value="{{ $n }}" @selected(request('per_page', 10) == $n)>{{ $n }}</option>
+                <div class="flex items-center gap-2">
+                    <span class="text-[10px] sm:text-xs font-semibold text-sky-400 whitespace-nowrap">Tampilkan</span>
+                    <select id="per-page-selector"
+                            class="px-3 py-1.5 rounded-xl text-sm font-bold text-sky-800 cursor-pointer transition-all"
+                            style="background:rgba(255,255,255,.75);border:1px solid rgba(186,230,253,.6);outline:none"
+                            onchange="changePerPage(this.value)">
+                        @foreach([10, 25, 50, 100] as $size)
+                            <option value="{{ $size }}" {{ request('per_page', 10) == $size ? 'selected' : '' }}>{{ $size }}</option>
                         @endforeach
                     </select>
-                    <span class="text-xs text-sky-500 dark:text-sky-400">per halaman</span>
-                </form>
+                    <span class="text-[10px] sm:text-xs font-semibold text-sky-400 whitespace-nowrap">per hal.</span>
+                </div>
             </div>
 
             <div class="overflow-x-auto">
                 <table class="w-full text-sm">
                     <thead>
                         <tr class="border-b border-sky-100 dark:border-sky-800">
+                            <th class="px-5 py-3.5 text-left text-xs font-bold uppercase tracking-wider text-sky-600 dark:text-sky-400 w-10">No</th>
                             <th class="px-5 py-3.5 text-left text-xs font-bold uppercase tracking-wider text-sky-600 dark:text-sky-400">Event</th>
                             <th class="px-5 py-3.5 text-left text-xs font-bold uppercase tracking-wider text-sky-600 dark:text-sky-400">Channel</th>
                             <th class="px-5 py-3.5 text-left text-xs font-bold uppercase tracking-wider text-sky-600 dark:text-sky-400">Target</th>
@@ -160,6 +153,7 @@
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-sky-50 dark:divide-sky-900">
+                        @php $tableRowNo = ($templates->currentPage() - 1) * $templates->perPage() + 1; @endphp
                         @forelse($templates as $tpl)
                         @php
                             $isAdmin  = auth()->user()->role === 'admin';
@@ -185,6 +179,9 @@
                                 ));
                         @endphp
                         <tr class="hover:bg-sky-50/50 dark:hover:bg-sky-900/20 transition-colors">
+                            <td class="px-5 py-3.5">
+                                <span class="text-xs font-bold text-sky-400">{{ $tableRowNo++ }}</span>
+                            </td>
                             <td class="px-5 py-3.5">
                                 <span class="font-semibold text-sky-900 dark:text-sky-100">{{ $tpl->event }}</span>
                             </td>
@@ -273,23 +270,20 @@
                     {{ $templates->firstItem() ?? 0 }}–{{ $templates->lastItem() ?? 0 }}
                     dari {{ $templates->total() }} template
                 </p>
-                <form method="GET" class="flex items-center gap-2">
-                    @foreach(request()->only(['channel','role','event']) as $key => $val)
-                        @if($val)<input type="hidden" name="{{ $key }}" value="{{ $val }}">@endif
-                    @endforeach
-                    <label class="text-xs text-sky-600 dark:text-sky-400">Tampilkan</label>
-                    <select name="per_page"
-                            onchange="this.form.submit()"
-                            class="rounded-lg border border-sky-200 dark:border-sky-700
-                                   bg-white/70 dark:bg-sky-950/50 text-sky-900 dark:text-sky-100
-                                   px-2 py-1 text-xs cursor-pointer">
-                        @foreach([10,25,50,100] as $n)
-                        <option value="{{ $n }}" @selected(request('per_page', 10) == $n)>{{ $n }}</option>
+                <div class="flex items-center gap-2">
+                    <span class="text-[10px] sm:text-xs font-semibold text-sky-400 whitespace-nowrap">Tampilkan</span>
+                    <select id="per-page-selector-mob"
+                            class="px-3 py-1.5 rounded-xl text-sm font-bold text-sky-800 cursor-pointer transition-all"
+                            style="background:rgba(255,255,255,.75);border:1px solid rgba(186,230,253,.6);outline:none"
+                            onchange="changePerPage(this.value)">
+                        @foreach([10, 25, 50, 100] as $size)
+                            <option value="{{ $size }}" {{ request('per_page', 10) == $size ? 'selected' : '' }}>{{ $size }}</option>
                         @endforeach
                     </select>
-                </form>
+                </div>
             </div>
 
+            @php $cardRowNo = ($templates->currentPage() - 1) * $templates->perPage() + 1; @endphp
             @forelse($templates as $tpl)
             @php
                 $isAdmin  = auth()->user()->role === 'admin';
@@ -319,7 +313,9 @@
                 {{-- Header --}}
                 <div class="flex items-start justify-between gap-2">
                     <div class="flex-1 min-w-0">
-                        <p class="font-semibold text-sky-900 dark:text-sky-100 truncate">{{ $tpl->event }}</p>
+                        <p class="font-semibold text-sky-900 dark:text-sky-100 truncate">
+                            <span class="text-sky-400 mr-1">{{ $cardRowNo++ }}.</span>{{ $tpl->event }}
+                        </p>
                         <p class="text-xs text-sky-500 dark:text-sky-400 capitalize mt-0.5">Target: {{ is_array($tpl->target_role) ? implode(', ', $tpl->target_role) : $tpl->target_role }}</p>
                     </div>
                     @include('masteradmin.notification-templates._toggle', compact('canEdit','tpl','toggleRoute'))
@@ -428,4 +424,13 @@
         </div>
 
     </div>
+
+    <script>
+        function changePerPage(value) {
+            const url = new URL(window.location.href);
+            url.searchParams.set('per_page', value);
+            url.searchParams.delete('page');
+            window.location.href = url.toString();
+        }
+    </script>
 </x-app-layout>

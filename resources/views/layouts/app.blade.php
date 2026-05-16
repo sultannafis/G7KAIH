@@ -182,6 +182,9 @@
     {{-- Global Confirm/Alert Modal --}}
     @include('components.confirm-modal')
 
+    {{-- Global Custom Select Upgrader --}}
+    @include('components.global-custom-select')
+
     @stack('scripts')
 </body>
 </html>

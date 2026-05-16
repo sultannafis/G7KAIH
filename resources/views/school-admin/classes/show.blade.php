@@ -235,11 +235,38 @@
                     </div>
                     <span class="inline-flex items-center px-3 py-1 rounded-xl text-xs font-black"
                         style="background:rgba(232,222,255,.7);color:#7c3aed;border:1px solid rgba(196,181,253,.4)">
-                        {{ $class->students->count() }} Siswa
+                        {{ $students->total() }} Siswa
                     </span>
                 </div>
+                
+                <div class="px-6 sm:px-8 py-4 border-b border-sky-100/50 flex flex-col sm:flex-row gap-4 justify-between items-center bg-sky-50/30">
+                    <form method="GET" action="{{ route('school-admin.classes.show', $class->id) }}" class="flex items-center gap-2 w-full sm:w-auto">
+                        <input type="hidden" name="per_page" value="{{ request('per_page', 10) }}">
+                        <div class="relative flex-1 sm:w-64">
+                            <input type="text" name="search" value="{{ request('search') }}" placeholder="Cari nama atau NIS/NISN..."
+                                class="w-full px-4 py-2 pl-9 rounded-xl text-sm font-medium border border-sky-200 bg-white/70 focus:bg-white focus:border-sky-400 focus:ring-2 focus:ring-sky-100 transition-all text-sky-800" />
+                            <svg class="w-4 h-4 absolute left-3 top-2.5 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                        </div>
+                        <button type="submit" class="px-4 py-2 bg-sky-500 hover:bg-sky-600 text-white rounded-xl text-sm font-bold transition-colors">Cari</button>
+                        @if(request('search'))
+                        <a href="{{ route('school-admin.classes.show', $class->id) }}" class="text-xs text-sky-500 font-semibold hover:text-sky-700 underline">Reset</a>
+                        @endif
+                    </form>
+                    <div class="flex items-center gap-2">
+                        <span class="text-[10px] sm:text-xs font-semibold text-sky-400 whitespace-nowrap">Tampilkan</span>
+                        <select id="per-page-selector"
+                                class="px-3 py-1.5 rounded-xl text-sm font-bold text-sky-800 cursor-pointer transition-all"
+                                style="background:rgba(255,255,255,.75);border:1px solid rgba(186,230,253,.6);outline:none"
+                                onchange="changePerPage(this.value)">
+                            @foreach([10, 25, 50, 100] as $size)
+                                <option value="{{ $size }}" {{ request('per_page', 10) == $size ? 'selected' : '' }}>{{ $size }}</option>
+                            @endforeach
+                        </select>
+                        <span class="text-[10px] sm:text-xs font-semibold text-sky-400 whitespace-nowrap">per hal.</span>
+                    </div>
+                </div>
 
-                @if($class->students->count() > 0)
+                @if($students->count() > 0)
 
                     {{-- Desktop Table --}}
                     <div class="table-desktop overflow-x-auto">
@@ -270,7 +297,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($class->students as $student)
+                                @foreach($students as $student)
                                     <tr class="trow" style="border-bottom:1px solid rgba(186,230,253,.22)">
                                         <td class="px-6 py-4 text-xs font-bold text-sky-400">{{ $loop->iteration }}</td>
                                         <td class="px-6 py-4 text-sm font-semibold text-sky-800">
@@ -306,7 +333,7 @@
 
                     {{-- Mobile Cards --}}
                     <div class="students-mobile p-4 space-y-3">
-                        @foreach($class->students as $student)
+                        @foreach($students as $student)
                             <div class="rounded-2xl p-4"
                                 style="background:rgba(240,249,255,.6);border:1px solid rgba(186,230,253,.5)">
                                 <div class="flex items-start justify-between mb-2">
@@ -348,11 +375,28 @@
                             </svg>
                         </div>
                         <h3 class="text-sm font-bold text-sky-700 mb-1">Belum ada siswa</h3>
-                        <p class="text-xs text-sky-400">Kelas ini belum memiliki siswa yang terdaftar.</p>
+                        <p class="text-xs text-sky-400">
+                            {{ request('search') ? 'Tidak ada siswa yang sesuai pencarian.' : 'Kelas ini belum memiliki siswa yang terdaftar.' }}
+                        </p>
                     </div>
+                @endif
+                
+                @if($students->hasPages())
+                <div class="px-6 py-4" style="border-top:1px solid rgba(186,230,253,.3)">
+                    {{ $students->appends(request()->query())->links() }}
+                </div>
                 @endif
             </div>
 
         </div>
     </div>
+    
+    <script>
+        function changePerPage(value) {
+            const url = new URL(window.location.href);
+            url.searchParams.set('per_page', value);
+            url.searchParams.delete('page');
+            window.location.href = url.toString();
+        }
+    </script>
 </x-app-layout>

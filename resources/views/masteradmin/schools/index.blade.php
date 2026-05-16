@@ -130,6 +130,51 @@
 
             {{-- Table Card --}}
             <div class="gc fade-in rounded-3xl overflow-hidden">
+                {{-- Filter Bar --}}
+                <div class="px-4 sm:px-6 py-4 border-b border-sky-100/60 bg-white/40">
+                    <div class="flex flex-col sm:flex-row gap-3 items-center justify-between">
+                        <form method="GET" action="{{ route('masteradmin.schools.approval.index') }}" class="flex-1 w-full sm:max-w-md flex gap-2">
+                            <input type="hidden" name="per_page" value="{{ request('per_page', 10) }}">
+                            <div class="relative flex-1">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <svg class="w-5 h-5 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                                    </svg>
+                                </div>
+                                <input type="text" name="search" value="{{ request('search') }}"
+                                       placeholder="Cari nama sekolah atau admin..."
+                                       class="w-full pl-10 pr-4 py-2.5 rounded-xl text-sm font-medium text-sky-700 placeholder-sky-300 focus:outline-none focus:ring-2 focus:ring-sky-300 transition-all"
+                                       style="background:rgba(255,255,255,.75);border:1px solid rgba(186,230,253,.6)">
+                            </div>
+                            <button type="submit"
+                                    class="px-4 inline-flex items-center justify-center rounded-xl text-sm font-bold text-white transition-all hover:shadow-md active:scale-95 shrink-0"
+                                    style="background:linear-gradient(135deg,#38bdf8,#0ea5e9);box-shadow:0 6px 16px rgba(14,165,233,.3)">
+                                Cari
+                            </button>
+                            @if(request('search'))
+                                <a href="{{ route('masteradmin.schools.approval.index', ['per_page' => request('per_page', 10)]) }}"
+                                   class="px-4 inline-flex items-center justify-center rounded-xl text-sm font-bold text-sky-600 transition-all hover:shadow-sm shrink-0"
+                                   style="background:rgba(240,249,255,.8);border:1px solid rgba(186,230,253,.6)">
+                                    Reset
+                                </a>
+                            @endif
+                        </form>
+
+                        <div class="flex items-center gap-2 w-full sm:w-auto shrink-0 mt-3 sm:mt-0 justify-end">
+                            <span class="text-[10px] sm:text-xs font-semibold text-sky-400 whitespace-nowrap">Tampilkan</span>
+                            <select id="per-page-selector"
+                                    class="px-3 py-1.5 rounded-xl text-sm font-bold text-sky-800 cursor-pointer transition-all"
+                                    style="background:rgba(255,255,255,.75);border:1px solid rgba(186,230,253,.6);outline:none"
+                                    onchange="changePerPage(this.value)">
+                                @foreach([10, 25, 50, 100] as $size)
+                                    <option value="{{ $size }}" {{ request('per_page', 10) == $size ? 'selected' : '' }}>{{ $size }}</option>
+                                @endforeach
+                            </select>
+                            <span class="text-[10px] sm:text-xs font-semibold text-sky-400 whitespace-nowrap">per hal.</span>
+                        </div>
+                    </div>
+                </div>
+
                 @if ($pendingSchools->count() > 0)
                     {{-- Mobile card list (< md) --}}
                     <div class="md:hidden divide-y" style="border-color:rgba(186,230,253,.2)">
@@ -379,5 +424,12 @@
             }).then(r => { if (r.redirected) window.location.href = r.url; else window.location.reload(); });
         });
         document.addEventListener('keydown', e => { if (e.key === 'Escape') closeRejectModal(); });
+
+        function changePerPage(value) {
+            const url = new URL(window.location.href);
+            url.searchParams.set('per_page', value);
+            url.searchParams.delete('page');
+            window.location.href = url.toString();
+        }
     </script>
 </x-app-layout>

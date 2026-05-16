@@ -337,9 +337,17 @@
                 <div class="pg-wrap">
                     <div class="flex items-center gap-3">
                         <span class="text-xs font-semibold text-slate-500">Tampil <strong id="pgFrom">1</strong>–<strong id="pgTo">10</strong> dari <strong id="pgTotal">{{ $students->count() }}</strong></span>
-                        <select class="pg-sel" id="perPageSelect" onchange="changePerPage(this.value)">
-                            <option value="10">10/hal</option><option value="25">25/hal</option><option value="50">50/hal</option><option value="100">100/hal</option>
-                        </select>
+                        <div class="flex items-center gap-2">
+                            <select id="perPageSelect"
+                                    class="px-3 py-1.5 rounded-xl text-sm font-bold text-sky-800 cursor-pointer transition-all"
+                                    style="background:rgba(255,255,255,.75);border:1px solid rgba(186,230,253,.6);outline:none"
+                                    onchange="changePerPage(this.value)">
+                                <option value="10">10 / hal</option>
+                                <option value="25">25 / hal</option>
+                                <option value="50">50 / hal</option>
+                                <option value="100">100 / hal</option>
+                            </select>
+                        </div>
                     </div>
                     <div class="flex items-center gap-1.5 flex-wrap" id="pgControls"></div>
                 </div>
