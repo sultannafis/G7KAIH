@@ -1,44 +1,44 @@
 <div align="center">
-  <img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="300" alt="Laravel Logo">
+  <img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="300" alt="Logo Laravel">
   <br/>
-  <h1>G7KAIH Management System</h1>
-  <p><strong>A Modern, Comprehensive School & Habit Tracking Platform</strong></p>
+  <h1>Sistem Manajemen G7KAIH</h1>
+  <p><strong>Platform Manajemen Sekolah & Pelacakan Kebiasaan yang Modern dan Komprehensif</strong></p>
   
   <p>
     <a href="#"><img src="https://img.shields.io/badge/Laravel-12.x-FF2D20?style=for-the-badge&logo=laravel&logoColor=white" alt="Laravel 12"></a>
     <a href="#"><img src="https://img.shields.io/badge/PHP-8.2+-777BB4?style=for-the-badge&logo=php&logoColor=white" alt="PHP 8.2"></a>
     <a href="#"><img src="https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white" alt="Tailwind"></a>
     <a href="#"><img src="https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white" alt="MySQL"></a>
-    <a href="#"><img src="https://img.shields.io/badge/Status-Active-brightgreen?style=for-the-badge" alt="Status"></a>
+    <a href="#"><img src="https://img.shields.io/badge/Status-Aktif-brightgreen?style=for-the-badge" alt="Status"></a>
   </p>
 </div>
 
 <br/>
 
-## Project Overview
+## Ringkasan Proyek
 
-**G7KAIH** is a state-of-the-art educational management and student habit-tracking system. Designed to bridge the communication gap between educators, students, and parents, it provides an intuitive, role-based platform for monitoring daily activities, spiritual habits, and academic progress. 
+**G7KAIH** adalah sistem manajemen pendidikan mutakhir yang dilengkapi dengan pelacakan kebiasaan siswa. Dirancang untuk menjembatani komunikasi antara pendidik, siswa, dan orang tua, platform ini menyediakan antarmuka berbasis peran untuk memantau aktivitas harian, kebiasaan spiritual (seperti Absensi Sholat), dan perkembangan akademik.
 
-By digitalizing habit submissions and validation workflows, G7KAIH eliminates manual tracking, reduces administrative overhead, and fosters a collaborative environment for student character development.
+Dengan mendigitalisasi alur pengiriman dan validasi kebiasaan, G7KAIH menghilangkan pencatatan manual, mengurangi beban administratif, dan mendorong lingkungan kolaboratif untuk pengembangan karakter siswa.
 
 ---
 
-## Key Features
+## Fitur Utama
 
-| Feature | Description | Benefit |
+| Fitur | Deskripsi | Manfaat |
 |---------|-------------|---------|
-| **Advanced RBAC** | Multi-tiered access control (MasterAdmin, SchoolAdmin, Teacher, Student, Parent). | Ensures secure, context-aware data access for every user type. |
-| **Habit Tracking** | Daily submission of activities and spiritual habits with multi-select tags. | Encourages consistency and accountability in student routines. |
-| **Validation Flow** | Multi-step approval process where parents validate and teachers assign points. | Maintains data integrity and ensures parental involvement. |
-| **Dynamic Reporting** | Comprehensive analytics and reporting with export capabilities. | Empowers educators with actionable insights on student progress. |
-| **Global Notifications** | Centralized notification template system for system-wide alerts. | Keeps all stakeholders informed of critical updates in real-time. |
-| **Responsive UI** | Mobile-first design using Tailwind CSS with seamless custom components. | Delivers a flawless user experience across all devices. |
+| **Advanced RBAC** | Kontrol akses bertingkat (MasterAdmin, SchoolAdmin, Guru, Siswa, Orang Tua). | Memastikan keamanan data dan akses yang sesuai konteks untuk setiap jenis pengguna. |
+| **Pelacakan Kebiasaan** | Pengiriman aktivitas harian dan kebiasaan spiritual dengan pilihan multi-tag. | Mendorong konsistensi dan tanggung jawab dalam rutinitas siswa. |
+| **Alur Validasi** | Proses persetujuan bertahap di mana orang tua memvalidasi dan guru memberikan poin. | Menjaga integritas data dan memastikan keterlibatan orang tua. |
+| **Pelaporan Dinamis** | Analisis dan pelaporan komprehensif dengan kemampuan ekspor data. | Memberdayakan pendidik dengan wawasan mendalam tentang perkembangan siswa. |
+| **Notifikasi Global** | Sistem template notifikasi terpusat untuk peringatan di seluruh sistem. | Menjaga semua pihak agar tetap mendapat informasi penting secara real-time. |
+| **UI Responsif** | Desain *mobile-first* menggunakan Tailwind CSS dengan komponen khusus yang mulus. | Memberikan pengalaman pengguna yang sempurna di semua perangkat. |
 
 ---
 
-## Tech Stack
+## Teknologi yang Digunakan
 
-The platform is built using modern, industry-standard technologies to ensure scalability, performance, and maintainability:
+Platform ini dibangun menggunakan teknologi modern berstandar industri untuk memastikan skalabilitas, performa, dan kemudahan pemeliharaan:
 
 <p align="center">
   <img src="https://img.shields.io/badge/Laravel-FF2D20?style=for-the-badge&logo=laravel&logoColor=white" alt="Laravel" />
@@ -51,95 +51,114 @@ The platform is built using modern, industry-standard technologies to ensure sca
 
 ---
 
-## UI/UX Preview
+## Panduan Instalasi
 
-> **Note:** Replace the image URLs below with actual screenshots of your application before publishing.
+Ikuti langkah-langkah berikut untuk menjalankan proyek ini di lingkungan lokal.
 
-<div align="center">
-  <img src="https://placehold.co/800x450/1f2937/ffffff?text=Dashboard+Overview" alt="Dashboard Preview" width="48%">
-  <img src="https://placehold.co/800x450/1f2937/ffffff?text=Habit+Submission+Mobile+View" alt="Mobile Preview" width="48%">
-</div>
-
----
-
-## Installation Guide
-
-Follow these steps to set up the project locally.
-
-### Prerequisites
-- PHP 8.2 or higher
+### Prasyarat
+- PHP 8.2 atau lebih tinggi
 - Composer
 - Node.js & NPM
 - MySQL Database
 
-### Step-by-Step
+### Langkah-langkah
 
-1. **Clone the repository**
+1. **Clone repositori**
    ```bash
-   git clone https://github.com/your-username/G7KAIH.git
+   git clone https://github.com/sultannafis/G7KAIH.git
    cd G7KAIH
    ```
 
-2. **Install PHP dependencies**
+2. **Instal dependensi PHP**
    ```bash
    composer install
    ```
 
-3. **Install NPM dependencies**
+3. **Instal dependensi NPM**
    ```bash
    npm install
    ```
 
-4. **Environment Setup**
+4. **Pengaturan Environment (.env)**
    ```bash
    cp .env.example .env
    php artisan key:generate
    ```
-   *Update your `.env` file with your database credentials.*
+   *Sesuaikan file `.env` dengan kredensial database Anda.*
 
-5. **Database Migration & Seeding**
+5. **Migrasi Database & Seeding**
    ```bash
    php artisan migrate --seed
    ```
 
-6. **Build Assets**
+6. **Build Aset**
    ```bash
    npm run build
    ```
 
-7. **Run the Development Server**
+7. **Jalankan Server Development**
    ```bash
    php artisan serve
    ```
 
-**Default Credentials:**
-- **Admin:** `admin@example.com` / `password`
-*(Check `DatabaseSeeder.php` for exact default credentials)*
+**Kredensial Default:**
+*(Silakan periksa `DatabaseSeeder.php` untuk akun kredensial bawaan yang tersedia)*
 
 ---
 
-## Usage Guide
+## Konfigurasi API (Layanan Pihak Ketiga)
 
-### Workflow Overview
-1. **SchoolAdmin** configures the academic year, classes, and user accounts.
-2. **Students** log in daily to submit their activities and habits.
-3. **Parents** review and validate these submissions via their dedicated portal.
-4. **Teachers** review the validated submissions, assign scores/points, and monitor overall class performance through the analytics dashboard.
+Aplikasi ini menggunakan beberapa layanan API pihak ketiga untuk mendukung berbagai fiturnya. Berikut adalah penjelasan fungsi dan cara mendapatkan kredensial untuk setiap API yang ada di file `.env`:
+
+### 1. Green API (WhatsApp Gateway)
+Digunakan untuk mengirimkan notifikasi pesan otomatis melalui WhatsApp kepada pengguna (misalnya: pengingat persetujuan, pemberitahuan akun, notifikasi poin).
+- **Cara Mendapatkan:** Daftar di [Green API](https://green-api.com/). Buat *instance* baru, lalu salin `ID Instance` dan `Token API`.
+- **Variabel .env:** `GREEN_API_INSTANCE_ID`, `GREEN_API_TOKEN`.
+
+### 2. Cloudinary
+Digunakan sebagai layanan penyimpanan *cloud* untuk aset media (misalnya: unggahan tanda tangan digital, foto profil pengguna). Ini mengurangi beban penyimpanan file gambar di server lokal.
+- **Cara Mendapatkan:** Buat akun di [Cloudinary](https://cloudinary.com/). Di halaman dasbor Anda, terdapat kredensial untuk *Cloud Name*, *API Key*, dan *API Secret*.
+- **Variabel .env:** `CLOUDINARY_CLOUD_NAME`, `CLOUDINARY_API_KEY`, `CLOUDINARY_API_SECRET`.
+
+### 3. Layanan AI (Gemini & Groq)
+Digunakan untuk mendukung fitur berbasis kecerdasan buatan dalam aplikasi.
+- **Cara Mendapatkan Gemini:** Dapatkan API Key secara gratis dari [Google AI Studio](https://aistudio.google.com/).
+- **Cara Mendapatkan Groq:** Daftar dan dapatkan API Key di [Groq Console](https://console.groq.com/).
+- **Variabel .env:** `GEMINI_API_KEY`, `GROQ_API_KEY`.
+
+### 4. Google reCAPTCHA
+Berfungsi untuk mengamankan form pendaftaran, login, atau input penting lainnya dari serangan *spam* dan *bot*.
+- **Cara Mendapatkan:** Daftarkan domain aplikasi Anda di [Google reCAPTCHA Admin Console](https://www.google.com/recaptcha/admin/).
+- **Variabel .env:** `RECAPTCHA_SITE_KEY`, `RECAPTCHA_SECRET_KEY`.
+
+### 5. Aladhan API (Jadwal Sholat)
+API publik ini digunakan untuk mengambil data jadwal waktu sholat harian yang akurat berdasarkan lokasi dan zona waktu untuk modul Absensi Sholat.
+- **Cara Penggunaan:** API ini bersifat terbuka dan tidak memerlukan pendaftaran atau *API Key*. Cukup pastikan URL bawaan (`ALADHAN_BASE_URL`) dan zona waktu (`ALADHAN_TIMEZONE=Asia/Jakarta`) terkonfigurasi dengan benar di file `.env`.
 
 ---
 
-## Project Benefits
+## Panduan Penggunaan
 
-- **Increased Productivity:** Automates manual data entry and report generation.
-- **Enhanced Collaboration:** Keeps parents actively involved in their child's daily development.
-- **Data-Driven Decisions:** Provides teachers with clear metrics on student behavioral patterns.
-- **Scalable Architecture:** Built on Laravel, ensuring the system can grow with the institution.
+### Alur Kerja Umum
+1. **SchoolAdmin** mengatur tahun ajaran, kelas, dan akun pengguna.
+2. **Siswa** login setiap hari untuk mengirimkan laporan aktivitas dan kebiasaan mereka (misalnya, kehadiran sholat).
+3. **Orang Tua** meninjau dan memvalidasi laporan tersebut melalui portal khusus mereka.
+4. **Guru** meninjau pengiriman yang telah divalidasi, memberikan nilai/poin, dan memantau kinerja kelas secara keseluruhan melalui dasbor analitik.
 
 ---
 
-## Folder Structure
+## Manfaat Proyek
 
-A high-level overview of the application's core structure:
+- **Peningkatan Produktivitas:** Mengotomatiskan entri data manual dan pembuatan laporan.
+- **Kolaborasi yang Lebih Baik:** Melibatkan orang tua secara aktif dalam perkembangan harian anak mereka.
+- **Keputusan Berbasis Data:** Memberikan metrik yang jelas kepada guru tentang pola perilaku siswa.
+- **Arsitektur yang Skalabel:** Dibangun menggunakan Laravel, memastikan sistem dapat berkembang seiring pertumbuhan institusi.
+
+---
+
+## Struktur Folder
+
+Gambaran tingkat tinggi dari struktur inti aplikasi:
 
 ```text
 G7KAIH/
@@ -148,7 +167,7 @@ G7KAIH/
 │   │   └── Controllers/
 │   │       ├── MasterAdmin/
 │   │       ├── SchoolAdmin/
-│   │       └── UserManagement/      # Centralized RBAC logic
+│   │       └── UserManagement/      # Logika RBAC Terpusat
 │   └── Models/
 ├── database/
 │   ├── migrations/
@@ -157,9 +176,9 @@ G7KAIH/
 │   ├── css/
 │   ├── js/
 │   └── views/
-│       ├── components/              # Reusable Blade components
+│       ├── components/              # Komponen Blade yang dapat digunakan kembali
 │       └── shared/
-│           └── user-management/     # Consolidated view templates
+│           └── user-management/     # Template tampilan yang digabungkan
 ├── routes/
 │   └── web.php
 └── tailwind.config.js
@@ -167,13 +186,13 @@ G7KAIH/
 
 ---
 
-## System Architecture
+## Arsitektur Sistem
 
 ```mermaid
 graph TD;
-    Client[Client / Browser] -->|HTTP Requests| Router[Laravel Router];
-    Router --> Middleware[Auth & Role Middleware];
-    Middleware --> Controllers[Unified Controllers];
+    Client[Klien / Browser] -->|HTTP Requests| Router[Laravel Router];
+    Router --> Middleware[Middleware Auth & Role];
+    Middleware --> Controllers[Controller Terpadu];
     Controllers --> Models[Eloquent Models];
     Models <--> Database[(MySQL Database)];
     Controllers --> Views[Blade Templates];
@@ -182,9 +201,9 @@ graph TD;
     subgraph Roles
         MasterAdmin
         SchoolAdmin
-        Teacher
-        Student
-        Parent
+        Guru
+        Siswa
+        OrangTua
     end
     
     Middleware -.-> Roles;
@@ -192,24 +211,24 @@ graph TD;
 
 ---
 
-## Contributing
+## Berkontribusi
 
-We welcome contributions to improve G7KAIH! Please follow these steps:
+Kami menyambut kontribusi untuk meningkatkan G7KAIH! Ikuti langkah-langkah berikut:
 
-1. Fork the repository.
-2. Create a new branch (`git checkout -b feature/AmazingFeature`).
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`).
-4. Push to the branch (`git push origin feature/AmazingFeature`).
-5. Open a Pull Request.
+1. *Fork* repositori ini.
+2. Buat *branch* baru (`git checkout -b feature/FiturLuarBiasa`).
+3. Lakukan *commit* pada perubahan Anda (`git commit -m 'Menambahkan FiturLuarBiasa'`).
+4. Lakukan *push* ke *branch* Anda (`git push origin feature/FiturLuarBiasa`).
+5. Buat sebuah *Pull Request*.
 
 ---
 
-## License
+## Lisensi
 
-This project is open-source and licensed under the [MIT License](LICENSE).
+Proyek ini bersifat *open-source* dan dilisensikan di bawah [Lisensi MIT](LICENSE).
 
 ---
 
 <div align="center">
-  <p>Built for better education management.</p>
+  <p>Dibuat untuk memajukan manajemen pendidikan.</p>
 </div>
