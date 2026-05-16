@@ -130,6 +130,8 @@ class HabitSubmissionController extends Controller
 
                         if ($endTime && $nowTime > $endTime) {
                             $sortKey += 86400;
+                            $canSubmit = false;
+                            $isPassed  = true;
                         }
                     }
                 } elseif ($habitRules->where('rule_type', 'manual')->isNotEmpty()) {
@@ -147,6 +149,7 @@ class HabitSubmissionController extends Controller
                     'is_multi_select' => false,
                     'can_submit'      => $canSubmit,
                     'opens_at'        => $opensAt,
+                    'is_passed'       => $isPassed ?? false,
                     'sort_key'        => $sortKey,
                 ];
 
@@ -183,6 +186,8 @@ class HabitSubmissionController extends Controller
 
                             if ($endTime && $nowTime > $endTime) {
                                 $sortKey += 86400;
+                                $canSubmit = false;
+                                $isPassed  = true;
                             }
                         }
                     } else {
@@ -200,6 +205,7 @@ class HabitSubmissionController extends Controller
                         'is_multi_select' => false,
                         'can_submit'      => $canSubmit,
                         'opens_at'        => $opensAt,
+                        'is_passed'       => $isPassed ?? false,
                         'sort_key'        => $sortKey,
                     ];
                 }
@@ -448,6 +454,10 @@ class HabitSubmissionController extends Controller
                     : $this->habitRuleService->getManualRuleForHabit($habit, $school);
             }
 
+            if ($isTimeBased && !$applicableRule) {
+                return back()->withInput()->with('error', 'Waktu pengumpulan tidak sesuai dengan jadwal kebiasaan ini.');
+            }
+
             $submission = $this->submissionService->submit(
                 student:     $student,
                 habit:       $habit,
@@ -512,6 +522,10 @@ class HabitSubmissionController extends Controller
         $applicableRule = $habitItem
             ? $this->habitRuleService->getApplicableRule($habitItem, $school, $now)
             : $this->habitRuleService->getApplicableRuleForHabit($habit, $school, $now);
+
+        if (!$applicableRule) {
+            return back()->with('error', 'Waktu pengumpulan tidak sesuai dengan jadwal kebiasaan ini.');
+        }
 
         try {
             $submission = $this->submissionService->submitWithoutMedia(

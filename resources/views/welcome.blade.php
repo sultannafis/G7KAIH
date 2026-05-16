@@ -74,17 +74,16 @@
                     <a href="#alur" class="hover:text-sky-600 transition-colors">Cara Kerja</a>
                     <a href="#faq" class="hover:text-sky-600 transition-colors">FAQ</a>
                 </div>
-                <div class="flex items-center gap-4">
+                <div class="flex items-center gap-2 sm:gap-4">
                     @auth
                         <a href="{{ url('/dashboard') }}"
-                            class="px-6 py-2.5 rounded-full bg-sky-600 text-white font-medium hover:bg-sky-700 transition-colors shadow-sm shadow-sky-200">Dashboard</a>
+                            class="px-4 py-2 sm:px-6 sm:py-2.5 rounded-full bg-sky-600 text-white font-medium hover:bg-sky-700 transition-colors shadow-sm shadow-sky-200 text-xs sm:text-base">Dashboard</a>
                     @else
                         <a href="{{ route('login') }}"
-                            class="px-5 py-2 rounded-full border border-sky-200 text-sky-700 font-medium hover:bg-sky-50 hover:border-sky-400 transition-all text-sm sm:text-base">Masuk</a>
+                            class="px-4 py-2 sm:px-5 sm:py-2 rounded-full border border-sky-200 text-sky-700 font-medium hover:bg-sky-50 hover:border-sky-400 transition-all text-xs sm:text-base">Masuk</a>
                         @if(Route::has('register'))
                             <a href="{{ route('register') }}"
-                                class="px-6 py-2.5 rounded-full bg-sky-600 text-white font-medium hover:bg-sky-700 hover:scale-105 transition-all shadow-sm shadow-sky-200">Daftar
-                                Sekolah</a>
+                                class="px-4 py-2 sm:px-6 sm:py-2.5 rounded-full bg-sky-600 text-white font-medium hover:bg-sky-700 hover:scale-105 transition-all shadow-sm shadow-sky-200 text-xs sm:text-base">Daftar<span class="hidden sm:inline"> Sekolah</span></a>
                         @endif
                     @endauth
                 </div>

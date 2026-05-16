@@ -107,6 +107,7 @@ class MyClassController extends Controller
             ->values()
             ->keyBy(fn($s) => $s['student']->id)
             ->all();
+            
 
         return view('teacher.my-class.index', compact(
             'myClass', 'students', 'habits', 'today',
@@ -148,6 +149,53 @@ class MyClassController extends Controller
         $filename = 'laporan-' . str($name)->slug() . '-' . $from . '-' . $to . '.pdf';
 
         return $pdf->download($filename);
+    }
+
+    /**
+     * Download laporan sebagai file ZIP berisi PDF masing-masing siswa.
+     * GET /teacher/my-class/bulk-report/download
+     */
+    public function bulkReportDownload(Request $request)
+    {
+        $user   = Auth::user();
+        $school = $user->school;
+
+        $myClass = G7KaihClass::where('teacher_id', $user->id)
+            ->where('school_id', $school->id)
+            ->where('is_active', true)
+            ->first();
+
+        abort_unless($myClass, 403, 'Kamu tidak memiliki kelas aktif.');
+
+        $students = Student::where('g7_kaih_class_id', $myClass->id)->get();
+
+        $from     = \Carbon\Carbon::parse($request->get('date_from', now()->startOfMonth()))->format('Ymd');
+        $to       = \Carbon\Carbon::parse($request->get('date_to', now()))->format('Ymd');
+        $zipFileName = 'laporan-kelas-' . str($myClass->name)->slug() . '-' . $from . '-' . $to . '.zip';
+        $zipPath = storage_path('app/public/' . $zipFileName);
+
+        $zip = new \ZipArchive();
+        if ($zip->open($zipPath, \ZipArchive::CREATE | \ZipArchive::OVERWRITE) === TRUE) {
+            foreach ($students as $student) {
+                $data = $this->buildReportData($request, $student);
+
+                $pdf = Pdf::loadView('teacher.my-class.student-report-pdf', $data)
+                    ->setPaper('a4', 'landscape')
+                    ->setOptions([
+                        'defaultFont'          => 'sans-serif',
+                        'isHtml5ParserEnabled' => true,
+                        'isRemoteEnabled'      => false,
+                        'dpi'                  => 150,
+                    ]);
+
+                $name = $student->user->name;
+                $filename = 'Laporan - ' . $name . ' (' . $from . '-' . $to . ').pdf';
+                $zip->addFromString($filename, $pdf->output());
+            }
+            $zip->close();
+        }
+
+        return response()->download($zipPath)->deleteFileAfterSend(true);
     }
 
     // ── shared builder ──────────────────────────────────────────────

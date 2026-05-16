@@ -34,7 +34,8 @@
     {{-- Panel Chatbot --}}
     <div id="g7-ai-panel"
         style="display:none;flex-direction:column;
-               width:380px;height:560px;
+               width:90vw;max-width:380px;
+               height:70vh;max-height:560px;
                position:absolute;bottom:64px;right:0;
                border-radius:16px;overflow:hidden;
                background:#ffffff;

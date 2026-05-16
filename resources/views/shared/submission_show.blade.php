@@ -206,7 +206,7 @@
                                     <div class="flex items-center justify-between mb-0.5">
                                         <p class="text-xs font-bold text-sky-700 capitalize flex items-center gap-1.5">
                                             @if($val->validator_type === 'ai')
-                                            <span class="px-1.5 py-0.5 rounded text-[10px] font-black" style="background:rgba(237,233,254,.7);color:#6d28d9">✨ AI</span>
+                                            <span class="px-1.5 py-0.5 rounded text-[10px] font-black" style="background:rgba(237,233,254,.7);color:#6d28d9">AI Asisten G7KAIH</span>
                                             @else
                                             {{ ucfirst($val->validator_type) }}
                                             @if($val->validator) — {{ $val->validator->name }}@endif
@@ -252,14 +252,27 @@
                 @endif
 
                 <div class="flex flex-col sm:flex-row gap-3">
-                    {{-- Tombol Setujui: selalu buka modal override poin --}}
-                    <button type="button"
-                            onclick="document.getElementById('override-modal').classList.add('open')"
-                            class="flex-1 flex items-center justify-center gap-2 py-3.5 rounded-2xl text-sm font-bold text-white transition-all hover:shadow-lg"
-                            style="background:linear-gradient(135deg,#34d399,#10b981);box-shadow:0 6px 20px rgba(16,185,129,.3)">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
-                        @if($isAiValid) Konfirmasi & Kunci Poin @else Setujui & Kunci Poin @endif
-                    </button>
+                    @if(isset($roleLabel) && str_contains(strtolower($roleLabel), 'orang tua'))
+                        <form method="POST" action="{{ $approveRoute }}" class="flex-1">
+                            @csrf
+                            <input type="hidden" name="from" value="validation">
+                            <button type="submit"
+                                    class="w-full flex items-center justify-center gap-2 py-3.5 rounded-2xl text-sm font-bold text-white transition-all hover:shadow-lg"
+                                    style="background:linear-gradient(135deg,#34d399,#10b981);box-shadow:0 6px 20px rgba(16,185,129,.3)">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                                Setujui
+                            </button>
+                        </form>
+                    @else
+                        {{-- Tombol Setujui: selalu buka modal override poin --}}
+                        <button type="button"
+                                onclick="document.getElementById('override-modal').classList.add('open')"
+                                class="flex-1 flex items-center justify-center gap-2 py-3.5 rounded-2xl text-sm font-bold text-white transition-all hover:shadow-lg"
+                                style="background:linear-gradient(135deg,#34d399,#10b981);box-shadow:0 6px 20px rgba(16,185,129,.3)">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                            @if($isAiValid) Konfirmasi & Kunci Poin @else Setujui & Kunci Poin @endif
+                        </button>
+                    @endif
 
                     <button type="button"
                             onclick="document.getElementById('reject-modal').classList.add('open')"

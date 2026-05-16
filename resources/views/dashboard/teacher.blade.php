@@ -300,49 +300,53 @@
                         @if($recentPendingSubmissions->isNotEmpty())
                         <div class="space-y-2">
                             @foreach($recentPendingSubmissions as $sub)
-                            <div class="sub-row flex items-center gap-3 p-3">
-                                {{-- Avatar --}}
-                                <div class="ic ic-blue shrink-0 font-bold text-sm" style="width:36px;height:36px;border-radius:10px">
-                                    {{ strtoupper(substr($sub->student->user->name ?? 'S', 0, 1)) }}
+                            <div class="sub-row flex flex-col sm:flex-row sm:items-center gap-3 p-3">
+                                <div class="flex items-center gap-3 w-full sm:w-auto flex-1 min-w-0">
+                                    {{-- Avatar --}}
+                                    <div class="ic ic-blue shrink-0 font-bold text-sm" style="width:36px;height:36px;border-radius:10px">
+                                        {{ strtoupper(substr($sub->student->user->name ?? 'S', 0, 1)) }}
+                                    </div>
+                                    {{-- Info --}}
+                                    <div class="flex-1 min-w-0">
+                                        <p class="text-sm font-bold text-sky-800 truncate">{{ $sub->student->user->name ?? '—' }}</p>
+                                        <p class="text-xs text-sky-400 font-medium truncate">
+                                            {{ $sub->habit->name ?? '—' }}@if($sub->habitItem) &middot; {{ $sub->habitItem->name }}@endif
+                                        </p>
+                                    </div>
                                 </div>
-                                {{-- Info --}}
-                                <div class="flex-1 min-w-0">
-                                    <p class="text-sm font-bold text-sky-800 truncate">{{ $sub->student->user->name ?? '—' }}</p>
-                                    <p class="text-xs text-sky-400 font-medium truncate">
-                                        {{ $sub->habit->name ?? '—' }}@if($sub->habitItem) &middot; {{ $sub->habitItem->name }}@endif
-                                    </p>
-                                </div>
-                                {{-- Status --}}
-                                <span class="chip shrink-0
-                                    @if($sub->status === 'ai_valid') chip-green
-                                    @elseif($sub->status === 'ai_rejected') chip-rose
-                                    @else chip-amber @endif">
-                                    {{ $sub->status_label }}
-                                </span>
-                                {{-- Buttons --}}
-                                <div class="flex items-center gap-1.5 shrink-0">
-                                    <a href="{{ route('teacher.validations.show', $sub) }}" class="abtn abtn-view" title="Lihat Detail">
-                                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
-                                        </svg>
-                                    </a>
-                                    <form method="POST" action="{{ route('teacher.validations.approve', $sub) }}" class="inline"
-                                          onsubmit="return confirm('Setujui submission {{ addslashes($sub->student->user->name ?? '') }}?')">
-                                        @csrf
-                                        <input type="hidden" name="from" value="dashboard">
-                                        <button type="submit" class="abtn abtn-ok" title="Setujui">
+                                <div class="flex items-center justify-between sm:justify-end gap-3 w-full sm:w-auto shrink-0">
+                                    {{-- Status --}}
+                                    <span class="chip shrink-0
+                                        @if($sub->status === 'ai_valid') chip-green
+                                        @elseif($sub->status === 'ai_rejected') chip-rose
+                                        @else chip-amber @endif">
+                                        {{ $sub->status_label }}
+                                    </span>
+                                    {{-- Buttons --}}
+                                    <div class="flex items-center gap-1.5 shrink-0">
+                                        <a href="{{ route('teacher.validations.show', $sub) }}" class="abtn abtn-view" title="Lihat Detail">
                                             <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/>
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                                            </svg>
+                                        </a>
+                                        <form method="POST" action="{{ route('teacher.validations.approve', $sub) }}" class="inline"
+                                              onsubmit="return confirm('Setujui submission {{ addslashes($sub->student->user->name ?? '') }}?')">
+                                            @csrf
+                                            <input type="hidden" name="from" value="dashboard">
+                                            <button type="submit" class="abtn abtn-ok" title="Setujui">
+                                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/>
+                                                </svg>
+                                            </button>
+                                        </form>
+                                        <button type="button" class="abtn abtn-no" title="Tolak"
+                                                onclick="openRejectModal({{ $sub->id }}, '{{ addslashes($sub->student->user->name ?? '') }}')">
+                                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/>
                                             </svg>
                                         </button>
-                                    </form>
-                                    <button type="button" class="abtn abtn-no" title="Tolak"
-                                            onclick="openRejectModal({{ $sub->id }}, '{{ addslashes($sub->student->user->name ?? '') }}')">
-                                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/>
-                                        </svg>
-                                    </button>
+                                    </div>
                                 </div>
                             </div>
                             @endforeach

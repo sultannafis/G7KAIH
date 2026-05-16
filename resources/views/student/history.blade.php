@@ -207,9 +207,11 @@
                                         {{ $submission->habitItem?->name ?? $submission->habit->name }}
                                     </p>
                                     @if($isMulti)
-                                        <div class="flex flex-wrap gap-1 mt-1">
+                                        <div class="mt-2" style="line-height: 1.8;">
                                             @foreach($submission->selectedActivities as $act)
-                                                <span class="text-[10px] bg-sky-50 text-sky-600 rounded px-1.5 py-0.5 border border-sky-100">{{ $act->name }}</span>
+                                                <span class="inline-block whitespace-nowrap text-[11px] bg-sky-50 text-sky-700 rounded-lg px-2 py-1 border border-sky-200 mr-1 mb-1 font-medium leading-none">
+                                                    {{ $act->name }}
+                                                </span>
                                             @endforeach
                                         </div>
                                     @elseif($submission->habitItem)
@@ -340,9 +342,11 @@
                                             <span class="text-[10px] text-slate-400">{{ $submission->submitted_at->format('H:i') }}</span>
                                         </div>
                                         @if($isMulti)
-                                            <div class="flex flex-wrap gap-1 mt-1">
+                                            <div class="mt-2" style="line-height: 1.8;">
                                                 @foreach($submission->selectedActivities as $act)
-                                                    <span class="text-[10px] bg-sky-50 text-sky-600 rounded px-2 py-0.5 border border-sky-100">{{ $act->name }}</span>
+                                                    <span class="inline-block whitespace-nowrap text-[11px] bg-sky-50 text-sky-700 rounded-lg px-2 py-1 border border-sky-200 mr-1 mb-1 font-medium leading-none">
+                                                        {{ $act->name }}
+                                                    </span>
                                                 @endforeach
                                             </div>
                                         @elseif($submission->habitItem)

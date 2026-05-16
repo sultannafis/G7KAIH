@@ -74,7 +74,7 @@
                         <div class="relative" x-data="{ open: false }">
                             <button @click="open = !open" @click.away="open = false"
                                 class="flex items-center gap-2 px-3.5 py-2 rounded-xl text-sm font-semibold transition-all duration-200 focus:outline-none
-                                       {{ request()->routeIs('masteradmin.user-management.*') ? 'bg-sky-500 text-white shadow-md shadow-sky-300/40' : 'text-sky-700 dark:text-sky-300 hover:bg-white/60 dark:hover:bg-sky-900/30 hover:shadow-sm' }}">
+                                       {{ request()->routeIs('user-management.*') ? 'bg-sky-500 text-white shadow-md shadow-sky-300/40' : 'text-sky-700 dark:text-sky-300 hover:bg-white/60 dark:hover:bg-sky-900/30 hover:shadow-sm' }}">
                                 <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
                                 </svg>
@@ -93,19 +93,19 @@
                                  class="absolute left-0 top-full mt-2 w-64 rounded-2xl overflow-hidden z-50"
                                  style="display:none;box-shadow:0 16px 40px rgba(14,165,233,0.15),0 4px 12px rgba(0,0,0,0.08);background:rgba(255,255,255,0.95);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.9);">
                                 <div class="p-2 space-y-0.5">
-                                    <a href="{{ route('masteradmin.user-management.teachers.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-slate-700 hover:bg-sky-50 hover:text-sky-700 transition-colors group">
+                                    <a href="{{ route('user-management.teachers.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-slate-700 hover:bg-sky-50 hover:text-sky-700 transition-colors group">
                                         <div class="w-8 h-8 rounded-lg bg-sky-100 flex items-center justify-center group-hover:bg-sky-500 transition-colors shrink-0">
                                             <svg class="w-4 h-4 text-sky-600 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
                                         </div>
                                         <span class="font-semibold">Manajemen Guru</span>
                                     </a>
-                                    <a href="{{ route('masteradmin.user-management.students.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-slate-700 hover:bg-sky-50 hover:text-sky-700 transition-colors group">
+                                    <a href="{{ route('user-management.students.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-slate-700 hover:bg-sky-50 hover:text-sky-700 transition-colors group">
                                         <div class="w-8 h-8 rounded-lg bg-sky-100 flex items-center justify-center group-hover:bg-sky-500 transition-colors shrink-0">
                                             <svg class="w-4 h-4 text-sky-600 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
                                         </div>
                                         <span class="font-semibold">Manajemen Siswa</span>
                                     </a>
-                                    <a href="{{ route('masteradmin.user-management.parents.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-slate-700 hover:bg-sky-50 hover:text-sky-700 transition-colors group">
+                                    <a href="{{ route('user-management.parents.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-slate-700 hover:bg-sky-50 hover:text-sky-700 transition-colors group">
                                         <div class="w-8 h-8 rounded-lg bg-sky-100 flex items-center justify-center group-hover:bg-sky-500 transition-colors shrink-0">
                                             <svg class="w-4 h-4 text-sky-600 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
                                         </div>
@@ -128,7 +128,7 @@
                         <div class="relative" x-data="{ open: false }">
                             <button @click="open = !open" @click.away="open = false"
                                 class="flex items-center gap-2 px-3.5 py-2 rounded-xl text-sm font-semibold transition-all duration-200 focus:outline-none
-                                       {{ request()->routeIs('school-admin.user-management.*') ? 'bg-sky-500 text-white shadow-md shadow-sky-300/40' : 'text-sky-700 hover:bg-white/60 hover:shadow-sm' }}">
+                                       {{ request()->routeIs('user-management.*') ? 'bg-sky-500 text-white shadow-md shadow-sky-300/40' : 'text-sky-700 hover:bg-white/60 hover:shadow-sm' }}">
                                 <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
                                 Pengguna
                                 <svg class="w-3.5 h-3.5 transition-transform duration-200" :class="{'rotate-180': open}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"/></svg>
@@ -136,19 +136,19 @@
                             <div x-show="open" x-transition:enter="transition ease-out duration-150" x-transition:enter-start="opacity-0 -translate-y-1 scale-95" x-transition:enter-end="opacity-100 translate-y-0 scale-100" x-transition:leave="transition ease-in duration-100" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0 scale-95"
                                  class="absolute left-0 top-full mt-2 w-56 rounded-2xl overflow-hidden z-50 p-2 space-y-0.5"
                                  style="display:none;box-shadow:0 16px 40px rgba(14,165,233,0.15),0 4px 12px rgba(0,0,0,0.08);background:rgba(255,255,255,0.95);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.9);">
-                                <a href="{{ route('school-admin.user-management.teachers.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold text-slate-700 hover:bg-sky-50 hover:text-sky-700 transition-colors group">
+                                <a href="{{ route('user-management.teachers.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold text-slate-700 hover:bg-sky-50 hover:text-sky-700 transition-colors group">
                                     <div class="w-8 h-8 rounded-lg bg-sky-100 flex items-center justify-center group-hover:bg-sky-500 transition-colors shrink-0">
                                         <svg class="w-4 h-4 text-sky-600 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
                                     </div>
                                     <span>Manajemen Guru</span>
                                 </a>
-                                <a href="{{ route('school-admin.user-management.students.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold text-slate-700 hover:bg-sky-50 hover:text-sky-700 transition-colors group">
+                                <a href="{{ route('user-management.students.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold text-slate-700 hover:bg-sky-50 hover:text-sky-700 transition-colors group">
                                     <div class="w-8 h-8 rounded-lg bg-sky-100 flex items-center justify-center group-hover:bg-sky-500 transition-colors shrink-0">
                                         <svg class="w-4 h-4 text-sky-600 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
                                     </div>
                                     <span>Manajemen Siswa</span>
                                 </a>
-                                <a href="{{ route('school-admin.user-management.parents.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold text-slate-700 hover:bg-sky-50 hover:text-sky-700 transition-colors group">
+                                <a href="{{ route('user-management.parents.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold text-slate-700 hover:bg-sky-50 hover:text-sky-700 transition-colors group">
                                     <div class="w-8 h-8 rounded-lg bg-sky-100 flex items-center justify-center group-hover:bg-sky-500 transition-colors shrink-0">
                                         <svg class="w-4 h-4 text-sky-600 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
                                     </div>
@@ -463,15 +463,15 @@
                         <svg class="w-4 h-4 transition-transform duration-200" :class="{'rotate-180':o}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"/></svg>
                     </button>
                     <div x-show="o" class="mt-1 ml-4 space-y-0.5 pl-3 border-l-2 border-sky-200">
-                        <a href="{{ route('masteradmin.user-management.teachers.index') }}" class="flex items-center gap-2.5 px-3 py-2 rounded-xl text-sm font-medium text-sky-600 hover:bg-sky-50 transition-colors">
+                        <a href="{{ route('user-management.teachers.index') }}" class="flex items-center gap-2.5 px-3 py-2 rounded-xl text-sm font-medium text-sky-600 hover:bg-sky-50 transition-colors">
                             <svg class="w-4 h-4 shrink-0 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
                             Manajemen Guru
                         </a>
-                        <a href="{{ route('masteradmin.user-management.students.index') }}" class="flex items-center gap-2.5 px-3 py-2 rounded-xl text-sm font-medium text-sky-600 hover:bg-sky-50 transition-colors">
+                        <a href="{{ route('user-management.students.index') }}" class="flex items-center gap-2.5 px-3 py-2 rounded-xl text-sm font-medium text-sky-600 hover:bg-sky-50 transition-colors">
                             <svg class="w-4 h-4 shrink-0 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
                             Manajemen Siswa
                         </a>
-                        <a href="{{ route('masteradmin.user-management.parents.index') }}" class="flex items-center gap-2.5 px-3 py-2 rounded-xl text-sm font-medium text-sky-600 hover:bg-sky-50 transition-colors">
+                        <a href="{{ route('user-management.parents.index') }}" class="flex items-center gap-2.5 px-3 py-2 rounded-xl text-sm font-medium text-sky-600 hover:bg-sky-50 transition-colors">
                             <svg class="w-4 h-4 shrink-0 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
                             Manajemen Orang Tua
                         </a>
@@ -491,15 +491,15 @@
                         <svg class="w-4 h-4 transition-transform duration-200" :class="{'rotate-180':o}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"/></svg>
                     </button>
                     <div x-show="o" class="mt-1 ml-4 space-y-0.5 pl-3 border-l-2 border-sky-200">
-                        <a href="{{ route('school-admin.user-management.teachers.index') }}" class="flex items-center gap-2.5 px-3 py-2 rounded-xl text-sm font-medium text-sky-600 hover:bg-sky-50 transition-colors">
+                        <a href="{{ route('user-management.teachers.index') }}" class="flex items-center gap-2.5 px-3 py-2 rounded-xl text-sm font-medium text-sky-600 hover:bg-sky-50 transition-colors">
                             <svg class="w-4 h-4 shrink-0 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
                             Manajemen Guru
                         </a>
-                        <a href="{{ route('school-admin.user-management.students.index') }}" class="flex items-center gap-2.5 px-3 py-2 rounded-xl text-sm font-medium text-sky-600 hover:bg-sky-50 transition-colors">
+                        <a href="{{ route('user-management.students.index') }}" class="flex items-center gap-2.5 px-3 py-2 rounded-xl text-sm font-medium text-sky-600 hover:bg-sky-50 transition-colors">
                             <svg class="w-4 h-4 shrink-0 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
                             Manajemen Siswa
                         </a>
-                        <a href="{{ route('school-admin.user-management.parents.index') }}" class="flex items-center gap-2.5 px-3 py-2 rounded-xl text-sm font-medium text-sky-600 hover:bg-sky-50 transition-colors">
+                        <a href="{{ route('user-management.parents.index') }}" class="flex items-center gap-2.5 px-3 py-2 rounded-xl text-sm font-medium text-sky-600 hover:bg-sky-50 transition-colors">
                             <svg class="w-4 h-4 shrink-0 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
                             Manajemen Orang Tua
                         </a>
@@ -616,22 +616,16 @@
             @endif
 
             @if(Auth::user()->role === 'orangtua')
-                <div x-data="{ o: false }">
-                    <button @click="o=!o" class="w-full flex items-center justify-between px-4 py-3 rounded-2xl text-sm font-semibold text-sky-700 hover:bg-sky-50 transition-all">
-                        <span class="flex items-center gap-3"><svg class="w-4 h-4 text-sky-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>Validasi Anak</span>
-                        <svg class="w-4 h-4 transition-transform duration-200" :class="{'rotate-180':o}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"/></svg>
-                    </button>
-                    <div x-show="o" class="mt-1 ml-4 space-y-0.5 pl-3 border-l-2 border-sky-200">
-                        <a href="{{ route('parent.validations.index', ['status' => 'pending_parent']) }}" class="flex items-center gap-2.5 px-3 py-2 rounded-xl text-sm font-medium text-sky-600 hover:bg-sky-50 transition-colors">
-                            <svg class="w-4 h-4 shrink-0 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                            Menunggu Validasi
-                        </a>
-                        <a href="{{ route('parent.validations.index', ['status' => 'all']) }}" class="flex items-center gap-2.5 px-3 py-2 rounded-xl text-sm font-medium text-sky-600 hover:bg-sky-50 transition-colors">
-                            <svg class="w-4 h-4 shrink-0 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"/></svg>
-                            Semua Riwayat
-                        </a>
-                    </div>
-                </div>
+                <a href="{{ route('parent.validations.index') }}"
+                class="w-full flex items-center gap-3 px-4 py-3 rounded-2xl text-sm font-semibold text-sky-700 hover:bg-sky-50 transition-all">
+                    
+                    <svg class="w-4 h-4 text-sky-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/>
+                    </svg>
+
+                    <span>Validasi Anak</span>
+                </a>
             @endif
 
             {{-- Profile & Logout --}}

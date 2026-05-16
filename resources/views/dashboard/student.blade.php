@@ -390,6 +390,8 @@
                             $isTime    = $card['isTime'];
                             $isActive  = $card['isActive'];
                             $opensAt   = $card['opensAt'];
+                            $canSubmit = $card['canSubmit'] ?? true;
+                            $isPassed  = isset($card['isPassed']) ? $card['isPassed'] : (isset($card['canSubmit']) && $card['canSubmit'] === false && !$opensAt);
 
                             $borderClass = $isActive ? 'habit-card-active' : 'habit-card-pending';
                             $badgeClass  = $isActive
@@ -429,7 +431,14 @@
 
                             {{-- Tombol --}}
                             <div class="px-4 pb-4">
-                                @if($isTime)
+                                @if(!$canSubmit)
+                                <div style="display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:9px 16px;border-radius:14px;font-size:.8rem;font-weight:600;color:#94a3b8;background:rgba(241,245,249,.6);border:1.5px solid rgba(203,213,225,.5);cursor:not-allowed;user-select:none;text-align:center;">
+                                    <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="flex-shrink:0"><circle cx="12" cy="12" r="10"/><path stroke-linecap="round" d="M12 6v6l4 2"/></svg>
+                                    <span style="line-height:1.2;">
+                                        {{ $isPassed ? 'Waktu terlewat, silakan ulangi besok' : ($opensAt ? 'Buka pukul ' . $opensAt : 'Belum tersedia') }}
+                                    </span>
+                                </div>
+                                @elseif($isTime)
                                 {{-- TIME-BASED: POST langsung, tidak butuh halaman create --}}
                                 <form action="{{ $quickSubmitUrl }}" method="POST">
                                     @csrf

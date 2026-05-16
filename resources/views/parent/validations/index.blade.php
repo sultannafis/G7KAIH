@@ -275,36 +275,34 @@
             $validCount   = (clone $base)->where('status','teacher_valid')->count();
         @endphp
         <div class="grid grid-cols-3 gap-2 sm:gap-5 anim-1">
-            <div class="gc stat-card rounded-2xl p-3 sm:p-6 flex items-center gap-3 sm:gap-5">
-                <div class="icon-sky h-10 w-10 sm:h-14 sm:w-14 rounded-xl sm:rounded-2xl flex items-center justify-center shrink-0">
-                    <svg class="w-5 h-5 sm:w-7 sm:h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+            <div class="gc stat-card rounded-2xl flex flex-col sm:flex-row items-center sm:items-center gap-1 sm:gap-5 p-3 sm:p-6 text-center sm:text-left">
+                <div class="icon-sky h-9 w-9 sm:h-14 sm:w-14 rounded-xl sm:rounded-2xl flex items-center justify-center shrink-0">
+                    <svg class="w-4 h-4 sm:w-7 sm:h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
                 </div>
-                <div>
-                    <p class="text-2xl sm:text-4xl font-black text-sky-800 leading-none">{{ $totalCount }}</p>
-                    <p class="text-xs sm:text-sm text-sky-500 font-semibold mt-1 hidden sm:block">Total Submission</p>
-                    <p class="text-[10px] text-sky-500 font-semibold mt-0.5 sm:hidden">Total</p>
-                    <div class="mt-2 h-1 rounded-full bg-sky-100 overflow-hidden w-16 sm:w-24"><div class="h-full rounded-full bg-gradient-to-r from-sky-400 to-sky-500 bar-shimmer" style="width:100%"></div></div>
-                </div>
-            </div>
-            <div class="gc stat-card rounded-2xl p-3 sm:p-6 flex items-center gap-3 sm:gap-5">
-                <div class="icon-amber h-10 w-10 sm:h-14 sm:w-14 rounded-xl sm:rounded-2xl flex items-center justify-center shrink-0">
-                    <svg class="w-5 h-5 sm:w-7 sm:h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                </div>
-                <div>
-                    <p class="text-2xl sm:text-4xl font-black text-amber-700 leading-none">{{ $pendingCount }}</p>
-                    <p class="text-xs sm:text-sm text-amber-500 font-semibold mt-1 hidden sm:block">Menunggu Validasi</p>
-                    <p class="text-[10px] text-amber-500 font-semibold mt-0.5 sm:hidden">Menunggu</p>
-                    <div class="mt-2 h-1 rounded-full bg-amber-100 overflow-hidden w-16 sm:w-24"><div class="h-full rounded-full bg-gradient-to-r from-amber-400 to-amber-500 bar-shimmer" style="width:{{ $totalCount>0?round(($pendingCount/$totalCount)*100):0 }}%"></div></div>
+                <div class="min-w-0">
+                    <p class="text-xl sm:text-4xl font-black text-sky-800 leading-none">{{ $totalCount }}</p>
+                    <p class="text-[10px] sm:text-sm text-sky-500 font-semibold mt-0.5 sm:mt-1 leading-tight">Total<span class="hidden sm:inline"> Submission</span></p>
+                    <div class="mt-1.5 sm:mt-2 h-1 rounded-full bg-sky-100 overflow-hidden w-10 sm:w-24 mx-auto sm:mx-0"><div class="h-full rounded-full bg-gradient-to-r from-sky-400 to-sky-500 bar-shimmer" style="width:100%"></div></div>
                 </div>
             </div>
-            <div class="gc stat-card rounded-2xl p-3 sm:p-6 flex items-center gap-3 sm:gap-5">
-                <div class="icon-green h-10 w-10 sm:h-14 sm:w-14 rounded-xl sm:rounded-2xl flex items-center justify-center shrink-0">
-                    <svg class="w-5 h-5 sm:w-7 sm:h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+            <div class="gc stat-card rounded-2xl flex flex-col sm:flex-row items-center sm:items-center gap-1 sm:gap-5 p-3 sm:p-6 text-center sm:text-left">
+                <div class="icon-amber h-9 w-9 sm:h-14 sm:w-14 rounded-xl sm:rounded-2xl flex items-center justify-center shrink-0">
+                    <svg class="w-4 h-4 sm:w-7 sm:h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                 </div>
-                <div>
-                    <p class="text-2xl sm:text-4xl font-black text-emerald-700 leading-none">{{ $validCount }}</p>
-                    <p class="text-xs sm:text-sm text-emerald-500 font-semibold mt-1">Selesai</p>
-                    <div class="mt-2 h-1 rounded-full bg-emerald-100 overflow-hidden w-16 sm:w-24"><div class="h-full rounded-full bg-gradient-to-r from-emerald-400 to-emerald-500 bar-shimmer" style="width:{{ $totalCount>0?round(($validCount/$totalCount)*100):0 }}%"></div></div>
+                <div class="min-w-0">
+                    <p class="text-xl sm:text-4xl font-black text-amber-700 leading-none">{{ $pendingCount }}</p>
+                    <p class="text-[10px] sm:text-sm text-amber-500 font-semibold mt-0.5 sm:mt-1 leading-tight">Menunggu<span class="hidden sm:inline"> Validasi</span></p>
+                    <div class="mt-1.5 sm:mt-2 h-1 rounded-full bg-amber-100 overflow-hidden w-10 sm:w-24 mx-auto sm:mx-0"><div class="h-full rounded-full bg-gradient-to-r from-amber-400 to-amber-500 bar-shimmer" style="width:{{ $totalCount>0?round(($pendingCount/$totalCount)*100):0 }}%"></div></div>
+                </div>
+            </div>
+            <div class="gc stat-card rounded-2xl flex flex-col sm:flex-row items-center sm:items-center gap-1 sm:gap-5 p-3 sm:p-6 text-center sm:text-left">
+                <div class="icon-green h-9 w-9 sm:h-14 sm:w-14 rounded-xl sm:rounded-2xl flex items-center justify-center shrink-0">
+                    <svg class="w-4 h-4 sm:w-7 sm:h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                </div>
+                <div class="min-w-0">
+                    <p class="text-xl sm:text-4xl font-black text-emerald-700 leading-none">{{ $validCount }}</p>
+                    <p class="text-[10px] sm:text-sm text-emerald-500 font-semibold mt-0.5 sm:mt-1 leading-tight">Selesai</p>
+                    <div class="mt-1.5 sm:mt-2 h-1 rounded-full bg-emerald-100 overflow-hidden w-10 sm:w-24 mx-auto sm:mx-0"><div class="h-full rounded-full bg-gradient-to-r from-emerald-400 to-emerald-500 bar-shimmer" style="width:{{ $totalCount>0?round(($validCount/$totalCount)*100):0 }}%"></div></div>
                 </div>
             </div>
         </div>
@@ -339,7 +337,7 @@
                     <input type="hidden" name="date_to"   id="date-to-val"   value="{{ request('date_to') }}">
 
                     {{-- Row 1: Status + Habit --}}
-                    <div class="grid grid-cols-2 gap-3 mb-3">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-3">
                         @php
                             $statusOpts=['pending_parent'=>'Perlu Validasi','teacher_valid'=>'Selesai','parent_rejected'=>'Ditolak','teacher_rejected'=>'Ditolak Guru','all'=>'Semua Status'];
                             $selStatus=request('status','pending_parent');

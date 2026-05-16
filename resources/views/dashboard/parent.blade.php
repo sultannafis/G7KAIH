@@ -181,10 +181,10 @@
 
                             {{-- Aktivitas yang dipilih (TIPE B multi-select) --}}
                             @if($sub && $habit->is_multi_select && $sub->selectedActivities->isNotEmpty())
-                            <div class="flex flex-wrap gap-1 mt-1.5">
+                            <div class="mt-1.5" style="line-height: 1.8;">
                                 @foreach($sub->selectedActivities as $activity)
-                                <span class="text-xs px-2 py-0.5 rounded-full font-medium"
-                                      style="background:rgba(224,242,254,.8);color:#0369a1;border:1px solid rgba(186,230,253,.6)">
+                                <span class="inline-block whitespace-nowrap text-[11px] px-2.5 py-1 rounded-full font-medium text-sky-700 mr-1 mb-1 leading-none"
+                                      style="background:rgba(224,242,254,.8);border:1px solid rgba(186,230,253,.6);">
                                     {{ $activity->name }}
                                 </span>
                                 @endforeach
