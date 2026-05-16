@@ -201,6 +201,7 @@
             .mc-preview-img {
                 width: 100%;
                 height: auto;        /* ← kunci: ikuti rasio asli */
+                max-height: 480px;
                 display: block;
                 object-fit: contain;
                 background: #f0f9ff;
@@ -697,8 +698,7 @@
             async startCamera() {
                 try {
                     this.stopCamera();
-                    const video = this.$refs.cameraVideo;
-                    if (video) { video.srcObject = null; }
+                    if (this.$refs.cameraVideo) { this.$refs.cameraVideo.srcObject = null; }
                     
                     /* Minta resolusi kotak (1:1) agar sesuai viewfinder */
                     this.stream = await navigator.mediaDevices.getUserMedia({
@@ -706,15 +706,18 @@
                         audio: this.mediaType === 'video',
                     });
                     
+                    this.captureState = 'streaming';
                     await this.$nextTick();
+                    
+                    const video = this.$refs.cameraVideo;
                     if (video) { 
                         video.srcObject = this.stream; 
                         /* Ensure muted is set before playing for Safari autoplay policies */
                         video.muted = true;
                         video.setAttribute('playsinline', '');
+                        video.load(); // Force reload video element
                         video.play().catch(e => console.error('Play error:', e)); 
                     }
-                    this.captureState = 'streaming';
                 } catch (err) {
                     console.error('Camera error:', err);
                     alert('Tidak dapat mengakses kamera. Pastikan izin kamera sudah diberikan.');
