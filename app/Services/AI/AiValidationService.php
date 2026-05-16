@@ -68,13 +68,12 @@ class AiValidationService
         $systemPrompt = $basePrompt
             . "\n\nNama habit yang divalidasi: '{$habitName}'."
             . "\n\nKamu HARUS membalas HANYA dalam format JSON berikut, tidak ada teks lain:"
-            . "\n{\"approved\": true/false, \"confidence\": 0-100, \"reason\": \"alasan singkat dalam Bahasa Indonesia\", \"needs_review\": true/false}"
-            . "\n\nATURAN KHUSUS VALIDASI:"
-            . "\n1. Jika tidak ada foto, gunakan konteks waktu, deskripsi, dan habit."
-            . "\n2. Contoh: Sholat Zuhur disubmit jam 13:00 WIB adalah VALID. Sholat Zuhur disubmit jam 23:00 WIB adalah TIDAK VALID."
-            . "\n3. needs_review = true jika kamu tidak yakin / butuh verifikasi guru."
-            . "\n4. approved = false jika bukti jelas tidak relevan, waktu tidak masuk akal, atau ada kecurangan."
-            . "\n5. Jika nama habit/item berupa beberapa kegiatan (misal: 'Kerja Bakti | Menolong orang'), baca DESKRIPSI dari siswa. Jika deskripsi logis merangkum semua aktivitas tersebut, anggap VALID dan berikan confidence tinggi jika foto yang dilampirkan menampilkan minimal SALAH SATU aktivitas tersebut. NAMUN JIKA foto sama sekali TIDAK RELEVAN dengan semua kegiatan yang dipilih, berikan needs_review = true agar dicek oleh guru.";
+            . "\n{\"approved\": true/false, \"confidence\": 0-100, \"reason\": \"penjelasan evaluasi dari waktu, deskripsi, dan foto (jika ada)\", \"needs_review\": true/false}"
+            . "\n\nATURAN KHUSUS PENGISIAN 'reason':"
+            . "\n- Jelaskan hasil evaluasimu terhadap aspek-aspek yang ada: (1) Waktu Submit, (2) Deskripsi, dan (3) Foto (hanya JIKA ada foto yang dikirimkan)."
+            . "\n- Jelaskan apakah aspek-aspek tersebut masuk akal, saling mendukung, dan relevan dengan habit '{$habitName}'."
+            . "\n- JIKA TIDAK ADA FOTO (contohnya habit yang tidak mewajibkan foto), JANGAN bahas atau sebut soal foto sama sekali di dalam 'reason', cukup jelaskan evaluasi dari Waktu Submit dan Deskripsi saja."
+            . "\n- Pastikan 'reason' tidak hanya fokus pada satu aspek, tapi merangkum analisis dari semua aspek yang dikirimkan oleh siswa.";
 
         // Bangun pesan user
         $userText  = "Habit: {$habitName}" . ($itemName ? " > {$itemName}" : "") . "\n";
